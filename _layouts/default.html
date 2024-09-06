@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  {% include head.html %}
+
+  <body>
+
+    <main id="main" role="main" class="{{ page.main_columns }}">
+      
+      {% include sidebar.html %}
+
+      {{ content }}
+
+    </main>
+
+    {% include footer.html %}
+
+
+  {% if page.url contains "/photos/" %}
+    {% include gallery_scroll_js.html %}
+  {% endif %}
+
+  {% include theme_switch_js.html %}
+
+  </body>
+</html>
+
+
+

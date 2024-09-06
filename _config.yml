@@ -1,0 +1,81 @@
+# 1. Site Details
+site: NBA—Ben Porter
+url: https://nba.ben.report
+title: nba.ben.report
+description: nba.ben.report
+
+
+# 2. Excluded files
+exclude:
+  - LICENSE
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - stretch.gemspec
+  - .jekyll-cache
+
+# 3. Gems / Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-target-blank
+
+# 4. Gem settings
+twitter:
+  username: penborter
+author: Ben Porter
+social:
+  name: Ben Porter
+  links:
+    - https://twitter.com/penborter
+    - https://www.linkedin.com/in/penborter
+markdown: kramdown
+
+# 5. Jekyll settings
+sass:
+  style: compressed
+timezone: Australia/Sydney #AEST FTW
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      main_columns: col-3 # Default to triple column layout
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page
+
+
+encoding: utf-8 
+lang: en-GB
+
+# 6. Collections
+collections:
+  pages:
+    output: true
+    permalink: /:name
+  posts:
+    output: true
+    permalink: /posts/:slug
+  projects:
+    output: true
+    permalink: /projects/:slug
+
+# 7. Site Navigation
+nav_header:
+- title: Posts
+  url: /posts
+- title: Stats
+  url: /stats
+- title: Home
+  url: https://ben.report

@@ -1,0 +1,20 @@
+  <nav role="navigation" {% if page.url contains 'photos' %}class="locked"{% endif %}>
+  
+    <a class="navName" href="/">
+      <span class="home-icon">🏠</span>
+      <div class="name-mix">
+        <span>NBA.ben.</span>
+        <span id="hover">porter</span>
+        <span id="normal">report</span>
+     </div>
+    </a>
+  
+    <ul class="nav-main">
+      {% for item in site.nav_header %}
+        <li class="{% if page.url contains item.url %} active{% endif %}">
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  
+  </nav>

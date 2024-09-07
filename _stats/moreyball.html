@@ -1,0 +1,23 @@
+---
+layout: post
+title: Moreyball Rate Tracker
+permalink:
+---
+
+{% assign pic_url = "https://cdn.nba.com/headshots/nba/latest/1040x760/" %}
+{% assign player_url = "https://www.nba.com/stats/player/" %}
+
+<p>
+  This is a list of the players with the highest <a href="/posts/moreyball-percentage">Moreyball rate</a>, updated daily. View the data script <a href="https://github.com/penborter/nba-data/blob/main/moreyball.py">here</a>.
+  The dotted line on the right represents a Moreyball rate of 100%. The cutoff is a minimum of 100 shots attempted. Last updated: <mark>TBC</mark>.
+</p>
+<div id="moreyball_list">
+  {% for player in site.data.moreyball.players %}
+
+  <a href="{{ player_url}}{{ player.id }}" class="nba_player rounded" style="--var:{{ player.mb_pct | times: 100 }}%;">
+    <img src="{{ pic_url }}{{ player.id }}.png" class="nba_headshot">
+    <span class="ranking">{{ forloop.index }}</span><h2>{{ player.name }}</h2><span class="mb_pct">{{ player.mb_pct | times: 100 }}%</span>
+  </a>
+
+  {% endfor %}
+</div>

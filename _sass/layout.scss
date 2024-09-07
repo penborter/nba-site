@@ -19,15 +19,15 @@ $dark: hsl(25, 25%, 10%);
 // 2.1 Main colours and accents
 $dark_accent_1: hsl(25, 30%, 30%);
 $dark_accent_2: hsl(25, 40%, 45%);
-$dark_accent_3: hsl(25, 60%, 50%);
-$light_accent_1: hsl(25, 90%, 40%);
-$light_accent_2: hsl(25, 80%, 40%);
-$light_accent_3: hsl(25, 70%, 30%);
+$dark_text: $dark; // Just use $dark
+$light_accent_1: hsl(25, 75%, 65%);
+$light_accent_2: hsl(25, 80%, 85%);
+$light_text: hsl(25, 50%, 90%);
 
 $dark-transparent-1: scale-color($dark, $alpha: -55%);
 $dark-transparent-2: scale-color($dark_accent_1, $alpha: -70%);
-$light-transparent-1: scale-color($light, $alpha: -55%);
-$light-transparent-2: scale-color($light_accent_1, $alpha: -70%);
+$light-transparent-1: scale-color($light_accent_2, $alpha: -55%);
+$light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
 
 // 2.2 CSS Variables
 // Converting sass variable colours to CSS variables for the dark / light theme switcher
@@ -39,42 +39,40 @@ $light-transparent-2: scale-color($light_accent_1, $alpha: -70%);
   --narrow-padding: max(1.5em, calc((100vw - #{$content-width}) / 2));
   --photo-padding: max(10px, calc(100vw / 2000));
 
-  --bg: #{$light};
-  --fg: #{$dark};
-
-  --bg-accent-1: #{$light_accent_1};
-  --bg-accent-2: #{$light_accent_2};
-  --bg-accent-3: #{$light_accent_3};
-
-  --fg-accent-1: #{$dark_accent_1};
-  --fg-accent-2: #{$dark_accent_2};
-
-  --bg-transparent: #{$light-transparent-1};
-  --bg-accent-transparent: #{$light-transparent-2};
-
-  --shadow-color: rgba(0, 0, 0, 0.03);
-  --border-color: var(--fg-accent-1);
-
-  --navName-color: #3f6d56;
-  --red: #f05d5e;
-}
-
-[data-theme="dark"] {
   --bg: #{$dark};
   --fg: #{$light};
 
   --bg-accent-1: #{$dark_accent_1};
   --bg-accent-2: #{$dark_accent_2};
-  --bg-accent-3: #{$dark_accent_3};
 
   --fg-accent-1: #{$light_accent_1};
-  --fg-accent-2: #{$light_accent_2};
+  --fg-text:     #{$light_text};
 
   --bg-transparent: #{$dark-transparent-1};
   --bg-accent-transparent: #{$dark-transparent-2};
 
   --shadow-color: rgba(0, 0, 0, 0.08);
   --border-color: var(--bg-accent-1);
+
+  --navName-color: #3f6d56;
+  --red: #f05d5e;
+}
+
+[data-theme="dark"] {
+  --bg: #{$light-accent-2};
+  --fg: #{$dark};
+
+  --bg-accent-1: #{$light_accent_1};
+  --bg-accent-2: #{$light_accent_2};
+
+  --fg-accent-1: #{$dark_accent_1};
+  --fg-text:     #{$dark_text};
+
+  --bg-transparent: #{$light-transparent-1};
+  --bg-accent-transparent: #{$light-transparent-2};
+
+  --shadow-color: rgba(0, 0, 0, 0.04);
+  --border-color: var(--fg-accent-1);
 
   --navName-color: #76ba98;
 
@@ -147,6 +145,11 @@ $light-transparent-2: scale-color($light_accent_1, $alpha: -70%);
   text-transform: uppercase;
 }
 
+.rounded {
+  border-radius: 10px;
+  border: 1px solid var(--fg);
+}
+
 .card {
 
   background: var(--fg-accent-2);
@@ -176,8 +179,8 @@ $light-transparent-2: scale-color($light_accent_1, $alpha: -70%);
   display: block;
   padding: 1em;
 
-  border-radius: 5px;
-  border: 1px solid var(--color-main);
+  //border-radius: 5px;
+  //border: 1px solid var(--color-main);
   background: var(--color-bg);
 
   text-decoration: none;
@@ -279,6 +282,9 @@ article {
     margin-top: 0;
   }
 
+  p {
+    color: var(--fg-text);
+  }
   .reading-meta p:first-child, p:first-child {
     margin-top: 0;
   }
@@ -798,8 +804,8 @@ img {
   //box-shadow: 0 2px 2px var(--shadow-color), 
   //             0 4px 4px var(--shadow-color), 
   //             0 8px 8px var(--shadow-color);
-  //border: 1px solid var(--fg);
-  border-radius: 5px;
+  border: 1px solid var(--fg);
+  border-radius: 10px;
 }
 
 img:not(.img-gallery) {
@@ -1354,11 +1360,12 @@ p button {
   display: flex;
   height: 102px;
   width: var(--var);
-  border: 1px solid var(--fg);
+  //border: 1px solid var(--fg);
+  //border-radius: 10px;
   background: var(--bg-accent-1);
   //padding-top: 0.4em;
   padding-left: 1em;
-  box-shadow: 0 2px 2px var(--shadow-color), 0 4px 4px var(--shadow-color), 0 8px 8px var(--shadow-color);
+  //box-shadow: 0 2px 2px var(--shadow-color), 0 4px 4px var(--shadow-color), 0 8px 8px var(--shadow-color);
 
   transition: 0.1s ease;
 

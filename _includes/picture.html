@@ -1,0 +1,30 @@
+{% comment %}
+Images to be inserted into posts.
+Pass the folder_name attribute into the post metadata and use as folder_name=page.folder_name
+Other attributes can be used as needed, requires:
+- folder
+- file
+Optional:
+- class, defaults to "normal"
+    - wide: full-width picture
+    - double: full height, two pictures side-by-side sharing a caption
+- caption
+- title
+
+{% endcomment %}
+
+{% assign filenames = include.file | split: "; " %}
+{% assign titles = include.title | split: "; " %}
+{% assign columns = filenames | size %}
+
+<div class="gallery pic-{{ include.class | default: "normal" }}" style="--columns: {{ columns | default: 1 }}">
+    {% for file in filenames %}
+    <figure>
+        <img class="rounded" src="{{ page.photoloc }}/{{ file }}" alt="{{ titles[forloop.index] }}" loading="lazy">
+    </figure>
+    {% endfor %}
+
+    {% if include.caption %}
+    <figcaption class="caption-{{ include.class | default: "normal" }}">{{ include.caption | markdownify }}</figcaption>
+    {% endif %}
+</div>

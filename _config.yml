@@ -1,6 +1,7 @@
 # 1. Site Details
 site: NBA—Ben Porter
 url: https://nba.ben.report
+home_url: https://ben.report
 title: nba.ben.report
 description: nba.ben.report
 
@@ -40,11 +41,6 @@ defaults:
   -
     scope:
       path: ""
-    values:
-      main_columns: col-3 # Default to triple column layout
-  -
-    scope:
-      path: ""
       type: "posts"
     values:
       layout: post
@@ -70,6 +66,9 @@ collections:
   projects:
     output: true
     permalink: /projects/:slug
+  stats:
+    output: true
+    permalink: /stats/:slug
 
 # 7. Site Navigation
 nav_header:

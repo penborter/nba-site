@@ -1,7 +1,10 @@
 ---
 layout: post
 title: Moreyball Rate Tracker
-permalink:
+photoloc: /assets/posts/moreyball
+sidebar: 
+toc: True
+last_updated: 03 November 2024
 ---
 
 {% assign pic_url = "https://cdn.nba.com/headshots/nba/latest/1040x760/" %}
@@ -9,15 +12,53 @@ permalink:
 
 <p>
   This is a list of the players with the highest <a href="/posts/moreyball-percentage">Moreyball rate</a>, updated daily. View the data script <a href="https://github.com/penborter/nba-data/blob/main/moreyball.py">here</a>.
-  The dotted line on the right represents a Moreyball rate of 100%. The cutoff is a minimum of 100 shots attempted. Last updated: <mark>TBC</mark>.
+  The dotted line on the right represents a Moreyball rate of 100%. The cutoff is a minimum of 100 shots attempted.
 </p>
-<div id="moreyball_list">
+
+<h2>Leaderboard</h2>
+
+<table>
+  <tr>
+    <th>Rank</th>
+    <th>Name</th>
+    <th>Team</th>
+    <th>MB Rate</th>
+  </tr>
+
   {% for player in site.data.moreyball.players %}
 
-  <a href="{{ player_url}}{{ player.id }}" class="nba_player rounded" style="--var:{{ player.mb_pct | times: 100 }}%;">
-    <img src="{{ pic_url }}{{ player.id }}.png" class="nba_headshot">
-    <span class="ranking">{{ forloop.index }}</span><h2>{{ player.name }}</h2><span class="mb_pct">{{ player.mb_pct | times: 100 }}%</span>
-  </a>
+    {% assign pct_split = player.mb_pct | round: 3 | split: "." %}
+    {% assign integral = pct_split[0] %}
+    {% assign fractional = pct_split[1] | append: "00" | truncate: 3, "" %}
 
+    {% if forloop.first %}
+      <tr>
+        <td class="table-rank">{{ forloop.index }}</td>
+        <td class="flex-row"><a href="{{ player_url}}{{ player.id }}">{{ player.name }}</a><img src="{{ pic_url }}{{ player.id }}.png" class="nba-headshot"></td>
+        <td class="center">{{ player.team }}</td>
+        <td class="center">{{ integral }}.{{ fractional }}</td>
+      </tr>
+
+    {% else %}
+    <tr>
+      <td class="table-rank">{{ forloop.index }}</td>
+      <td><a href="{{ player_url}}{{ player.id }}">{{ player.name }}</a></td>
+      <td class="center">{{ player.team }}</td>
+      <td class="center">{{ integral }}.{{ fractional }}</td>
+    </tr>
+    
+    {% endif %}
   {% endfor %}
-</div>
+</table>
+
+<h2>Graphs</h2>
+
+{% include picture.html 
+  file = "MB_DeanWade.png"
+  caption = "Moreyball leader as of November 2nd: Dean Wade."
+%}
+
+<p>
+  The missed shot on the edge of the restricted area is a bit suspect, and when you look at the video, Dean actually took off for the floater from outside the restricted area.
+  Not a Moreyball shot after all. Adjusting for this, Wade would drop to 97.6% of shots from Moreyball range, still in first place.
+</p>

@@ -5,7 +5,28 @@
 
   <body>
 
-    <main id="main" role="main" class="{{ page.main_columns }}">
+    <main id="main" role="main" class="{{ page.main_columns }} main-grid">
+
+      <div id="header-bar" class="main-grid">
+
+        {% include navigation.html %}
+
+        <div class="sidebar_titles">
+          {% if page.title %}
+            <h1>{{ page.title }}</h1>
+          {% endif %}
+      
+          {% if page.subtitle %}
+            <h2>{{ page.subtitle }}</h2>
+          {% endif %}
+
+          {% if page.date %}
+            <p>{{ page.date | date: "%Y-%m-%d" }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      
       
       {% include sidebar.html %}
 

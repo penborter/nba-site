@@ -72,9 +72,9 @@ collections:
 
 # 7. Site Navigation
 nav_header:
-- title: Posts
-  url: /posts
 - title: Stats
   url: /stats
+- title: Posts
+  url: /posts
 - title: Home
   url: https://ben.report

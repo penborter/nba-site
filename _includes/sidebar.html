@@ -1,15 +1,4 @@
 <div class="sidebar{% if page.url contains 'photos' %} locked{% endif %}">
-  {% include navigation.html %}
-  
-  <div class="sidebar_titles">
-    {% if page.title %}
-      <h1>{{ page.title }}</h1>
-    {% endif %}
-
-    {% if page.subtitle %}
-      <h2>{{ page.subtitle }}</h2>
-    {% endif %}
-  </div>
 
   {% if page.layout == "post" %}
   <div class="post-footer">
@@ -24,9 +13,6 @@
       </ul>
     {% endif %}
   
-    {% if page.date %}
-        <p>{{ page.date | date: "%Y-%m-%d" }}</p>
-    {% endif %}
   </div>
   {% endif %}
 

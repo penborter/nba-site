@@ -11,18 +11,21 @@ $pic-wide: 200px; // margin amount for extra wide pictures
 $caption-wide: calc(1 / #{$pic-wide}); // fits the caption back to normal content width
 
 // 1.2 Main colours
-$light: hsl(25, 100%, 60%);
-$dark: hsl(25, 25%, 10%);
+$light: hsl(40, 50%, 90%);
+$dark: hsl(23, 25%, 10%);
+$orange: hsl(20, 100%, 50%);
 
 
 // 2 Calculated Variables
 // 2.1 Main colours and accents
 $dark_accent_1: hsl(25, 30%, 30%);
-$dark_accent_2: hsl(25, 40%, 45%);
+$dark_accent_2: hsl(25, 20%, 15%);
 $dark_text: $dark; // Just use $dark
-$light_accent_1: hsl(25, 75%, 65%);
-$light_accent_2: hsl(25, 80%, 85%);
-$light_text: hsl(25, 50%, 90%);
+$light_accent_1: hsl(30, 100%, 85%);
+$light_accent_2: hsl(40, 50%, 85%);
+$light_text: hsl(24, 49%, 90%);
+$orange_accent_light: hsl(20, 100%, 75%);
+$orange_accent_dark: hsl(20, 100%, 35%);
 
 $dark-transparent-1: scale-color($dark, $alpha: -55%);
 $dark-transparent-2: scale-color($dark_accent_1, $alpha: -70%);
@@ -54,12 +57,12 @@ $light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
   --shadow-color: rgba(0, 0, 0, 0.08);
   --border-color: var(--bg-accent-1);
 
-  --navName-color: #3f6d56;
-  --red: #f05d5e;
+  --orange: #{$orange};
+  --orange-accent: #{$orange_accent_dark};
 }
 
 [data-theme="dark"] {
-  --bg: #{$light-accent-2};
+  --bg: #{$light};
   --fg: #{$dark};
 
   --bg-accent-1: #{$light_accent_1};
@@ -74,7 +77,7 @@ $light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
   --shadow-color: rgba(0, 0, 0, 0.04);
   --border-color: var(--fg-accent-1);
 
-  --navName-color: #76ba98;
+  --orange-accent: #{$orange_accent_light};
 
   // Theme switch button
   .dark-icon {
@@ -117,7 +120,7 @@ $light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
 }
 
 .border-top {
-  border-top: 1px solid var(--bg-accent-1);
+  border-top: 1px solid var(--orange-accent);
 }
 
 .border-bottom {
@@ -146,7 +149,7 @@ $light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
 }
 
 .rounded {
-  border-radius: 10px;
+  //border-radius: 10px;
   border: 1px solid var(--fg);
 }
 
@@ -246,7 +249,7 @@ body {
   a {
     color: var(--fg);
     text-underline-offset: 3px;
-    text-decoration-color: var(--bg-accent-1);
+    text-decoration-color: var(--orange-accent);
     text-decoration-thickness: 1.5px;
 
     &:not(nav a, .tag, .card, .list-cat-link, figure a, .image-wrapper a):hover {
@@ -258,12 +261,12 @@ body {
 
 main {
   background-color: var(--bg);
+}
 
+.main-grid {
   display: grid;
   grid-template-columns: 1fr $sidebar-width $content-width minmax($sidebar-width, 1fr) 1fr;
 }
-
-
 
 article>ul, ol {
   padding-left: 1em;
@@ -275,7 +278,7 @@ article>ul, ol {
 
 article {
   padding-bottom: 7em;
-  padding-top: calc(#{$navbar-height} + 4.5em - 0.3em); // height of nav + sidebar margins & padding - nav padding trick
+  padding-top: 2.5rem;
   grid-column: 3;
 
   &> :first-child {
@@ -290,19 +293,33 @@ article {
   }
 }
 
+#header-bar {
+  grid-column: 1/-1;
+  background: $orange;
+  width: 100vw;
+
+  p {
+    margin-bottom: 2rem;
+  }
+}
+
+.nav-box {
+  grid-column: 2;
+}
+
 nav {
   font-size: 16px;
   font-weight: 500;
   //position: relative;
-  background: var(--bg-transparent);
-  backdrop-filter: blur(10px);
+  //background: var(--bg-transparent);
+  //backdrop-filter: blur(10px);
 
-  height: $navbar-height;
+  //height: $navbar-height;
 
-  margin: -0.3em -0.5em 0 -0.5em;
-  padding: 0.3em 0.5em 0 0.5em;
+  //margin: -0.3em -0.5em 0 -0.5em;
+  padding: 2em;
 
-  border: 1px solid var(--bg);
+  //border: 1px solid var(--bg);
 
   &:hover {
     filter: none;
@@ -350,7 +367,7 @@ nav {
   a, a:visited, .navName {
     padding: 0;
     text-decoration: none;
-    color: var(--bg-accent-1);
+    color: var(--orange-accent);
 
     &:hover {
       text-decoration: underline;
@@ -361,7 +378,7 @@ nav {
 
   .active {
     text-decoration: underline;
-    text-decoration-color: var(--bg-accent-1);
+    text-decoration-color: var(--orange-accent);
     text-underline-offset: 4px;
   }
 
@@ -565,11 +582,11 @@ div.highlighter-rouge {
 .tag {
   text-decoration: none;
   padding: 0.3em 0.7em;
-  border-radius: 20px;
+  //border-radius: 20px;
 
   background-color: var(--bg);
-  color: var(--bg-accent-1);
-  border: 1px solid var(--bg-accent-1);
+  color: var(--orange-accent);
+  border: 1px solid var(--orange-accent);
 
   transition: 0.1s ease;
 
@@ -805,7 +822,7 @@ img {
   //             0 4px 4px var(--shadow-color), 
   //             0 8px 8px var(--shadow-color);
   border: 1px solid var(--fg);
-  border-radius: 10px;
+  //border-radius: 10px;
 }
 
 img:not(.img-gallery) {
@@ -854,8 +871,8 @@ iframe {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0 auto;
-  border: 1px solid;
+  //margin: 0 auto;
+  //border: 1px solid;
 
   thead tr {
     background: var(--fg);
@@ -863,17 +880,35 @@ table {
   }
 }
 
+th {
+  background: var(--fg);
+  color: var(--bg);
+}
+
 tr {
   height: 35px;
-  background: var(--bg-accent-2);
+  //background: var(--bg-accent-2);
 
   &:hover:not(thead tr) {
     filter: brightness(110%);
   }
+
+  img {
+    border: none;
+    margin-top: 0.4em;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .right {
+    text-align: right;
+  }
 }
 
 tr:nth-child(even) {
-  background: var(--bg);
+  background: var(--bg-accent-2);
 }
 
 // Table of Contents
@@ -1321,7 +1356,7 @@ p button {
     display: inline-block;
   }
 
-  span#hover, span#normal {
+  span.narrow {
     margin-left: -0.24em;
     margin-right: -0.1em;
   }
@@ -1356,7 +1391,7 @@ p button {
   border-right: 2px dashed var(--bg-accent-1);
 }
 
-.nba_player {
+.nba-player {
   display: flex;
   height: 102px;
   width: var(--var);
@@ -1389,6 +1424,24 @@ p button {
     box-shadow: none;
     z-index: 1;
   }
+}
+
+img.nba-headshot {
+  height: 75px;
+  width: fit-content;
+  display: inline;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.table-rank {
+  font-family: 'Undefined Medium', monospace;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--orange);
 }
 
 .ranking {

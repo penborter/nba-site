@@ -5,6 +5,11 @@
   src: url('/assets/fonts/iADuo.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: "Undefined Medium";
+  src: url('/assets/fonts/undefined-medium.woff2') format('woff2');
+}
+
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -13,15 +18,10 @@ body {
   font-size: 16px;
 }
 
-code, figcaption, .imagecaption {
-  font-family: "iA Duo", monospace;
-  font-size: 0.9em;
-  //letter-spacing: 0;
+figcaption, .post-nav, .mono, .sidebar_titles p{
+  font-family: 'Undefined Medium', monospace;
+  font-size: 1.05rem;
 }
-
-//h1, h2, nav, figcaption, footer, blockquote, .card, .imagecaption, .footnotes, .post-nav, .title, .toc {
-//  font-family: 'Inter', 'Times New Roman', Times, serif;
-//}
 
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
@@ -32,13 +32,10 @@ h1, h2, h3 {
 }
 
 h1 {
-  //filter: blur(0.3px);
-}
-
-h1 {
-  margin: 2.5rem 0;
-  font-size: 1.25rem;
-  font-weight: 500;
+  margin: 2rem 0 0 0;
+  font-size: 4rem;
+  font-weight: 1000;
+  line-height: 1.1;
 }
 
 h2, h3 {

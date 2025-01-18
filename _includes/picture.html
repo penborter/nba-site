@@ -20,7 +20,7 @@ Optional:
 <div class="gallery pic-{{ include.class | default: "normal" }}" style="--columns: {{ columns | default: 1 }}">
     {% for file in filenames %}
     <figure>
-        <img class="rounded" src="{{ page.photoloc }}/{{ file }}" alt="{{ titles[forloop.index] }}" loading="lazy">
+        <img src="{{ page.photoloc }}/{{ file }}" alt="{{ titles[forloop.index] }}" loading="lazy">
     </figure>
     {% endfor %}
 

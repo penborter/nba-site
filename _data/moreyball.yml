@@ -1,82 +1,80 @@
-players:
-- id: '1641775'
-  mb_pct: '1.0'
-  name: Jordan Walsh
-  team: BOS
 - id: '1629731'
-  mb_pct: '0.984'
+  mb_pct: '0.987'
   name: Dean Wade
   team: CLE
-- id: '1629629'
-  mb_pct: '0.97'
-  name: Cam Reddish
-  team: LAL
+- id: '1629723'
+  mb_pct: '0.983'
+  name: John Konchar
+  team: MEM
 - id: '1630241'
-  mb_pct: '0.956'
+  mb_pct: '0.964'
   name: Sam Merrill
   team: CLE
-- id: '1628470'
-  mb_pct: '0.954'
-  name: Torrey Craig
-  team: CHI
-- id: '1628366'
-  mb_pct: '0.952'
-  name: Lonzo Ball
-  team: CHI
-- id: '1630171'
-  mb_pct: '0.951'
-  name: Isaac Okoro
+- id: '1629622'
+  mb_pct: '0.948'
+  name: Max Strus
   team: CLE
-- id: '1642270'
-  mb_pct: '0.947'
-  name: Donovan Clingan
-  team: POR
-- id: '1627827'
-  mb_pct: '0.942'
-  name: Dorian Finney-Smith
-  team: BKN
-- id: '1631260'
-  mb_pct: '0.94'
-  name: AJ Green
-  team: MIL
-- id: '1630573'
-  mb_pct: '0.936'
-  name: Sam Hauser
-  team: BOS
 - id: '203926'
-  mb_pct: '0.936'
+  mb_pct: '0.945'
   name: Doug McDermott
   team: SAC
-- id: '1630572'
-  mb_pct: '0.935'
-  name: Sandro Mamukelashvili
-  team: SAS
-- id: '1626168'
-  mb_pct: '0.934'
-  name: Trey Lyles
-  team: SAC
-- id: '1628978'
-  mb_pct: '0.933'
-  name: Donte DiVincenzo
-  team: MIN
-- id: '1641767'
-  mb_pct: '0.924'
-  name: Ben Sheppard
-  team: IND
-- id: '1642277'
-  mb_pct: '0.924'
-  name: Johnny Furphy
-  team: IND
+- id: '1631119'
+  mb_pct: '0.944'
+  name: Jaylin Williams
+  team: OKC
+- id: '1630171'
+  mb_pct: '0.939'
+  name: Isaac Okoro
+  team: CLE
+- id: '1627827'
+  mb_pct: '0.932'
+  name: Dorian Finney-Smith
+  team: LAL
+- id: '1630573'
+  mb_pct: '0.929'
+  name: Sam Hauser
+  team: BOS
+- id: '1630643'
+  mb_pct: '0.915'
+  name: Jay Huff
+  team: MEM
 - id: '1630577'
-  mb_pct: '0.921'
+  mb_pct: '0.913'
   name: Julian Champagnie
   team: SAS
-- id: '1641730'
-  mb_pct: '0.915'
-  name: Noah Clowney
-  team: BKN
-- id: '1630543'
-  mb_pct: '0.913'
-  name: Isaiah Jackson
-  team: IND
-
+- id: '1630534'
+  mb_pct: '0.912'
+  name: Ochai Agbaji
+  team: TOR
+- id: '201587'
+  mb_pct: '0.911'
+  name: Nicolas Batum
+  team: LAC
+- id: '1626168'
+  mb_pct: '0.911'
+  name: Trey Lyles
+  team: SAC
+- id: '1631200'
+  mb_pct: '0.905'
+  name: Kris Murray
+  team: POR
+- id: '1631216'
+  mb_pct: '0.903'
+  name: Caleb Houstan
+  team: ORL
+- id: '1642270'
+  mb_pct: '0.903'
+  name: Donovan Clingan
+  team: POR
+- id: '1631260'
+  mb_pct: '0.901'
+  name: AJ Green
+  team: MIL
+- id: '1629726'
+  mb_pct: '0.9'
+  name: Garrison Mathews
+  team: ATL
+- id: '1631169'
+  mb_pct: '0.895'
+  name: Josh Minott
+  team: MIN

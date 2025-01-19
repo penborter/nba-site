@@ -253,7 +253,7 @@ body {
   a {
     color: var(--fg);
     text-underline-offset: 3px;
-    text-decoration-color: var(--orange-accent);
+    text-decoration-color: var(--orange);
     text-decoration-thickness: 1.5px;
 
     &:not(nav a, .tag, .card, .list-cat-link, figure a, .image-wrapper a):hover {
@@ -887,8 +887,20 @@ table {
   }
 }
 
+.full-table {
+  grid-column: 1/-1;
+  width: 100vw;
+
+  th {
+    position: sticky;
+    top: 0em;
+  }
+}
+
 th {
-  padding: 0 1em 1em 1em;
+  background: var(--bg);
+  
+  padding: 0 0.8em 1em 0.8em;
   border-bottom: 1.5px solid var(--fg);
 
   &:not(:last-of-type) {
@@ -898,13 +910,16 @@ th {
 
 tr {
 
-  &:nth-child(2) {
-    * {
-      padding-top: 1em;
+  &:nth-child(10n + 2) {
+    *::before {
+      height: 1em;
+      display: table-row;
+      content: "";
+      background: transparent;
     }
   }
   //height: 35px;
-  //background: var(--bg);
+  background: var(--bg);
 
   &:hover:not(thead tr) {
     filter: brightness(105%);
@@ -929,7 +944,7 @@ tr:nth-child(even) {
 }
 
 td {
-  padding: 0.2em 1em;
+  padding: 0.2em 0.8em;
 
   &:not(:last-of-type) {
     border-right: 1.5px solid var(--fg);
@@ -954,10 +969,32 @@ th, tr {
   }
 }
 
-.team-col {
+.team-name {
   color: var(--color);
   background: var(--background);
+
+  padding: 0.1em 0.5em;
+  border-radius: 5px;
 }
+
+.sort-asc::after {
+  content: ' ↑';
+  color: var(--fg);
+}
+
+.sort-desc::after {
+  content: ' ↓';
+  color: var(--fg);
+}
+
+select#team-filter {
+  font-family: 'Departure Mono', monospace;
+  border: none;
+  background: var(--bg);
+  font-size: 16.5px;
+  letter-spacing: -0.02em;
+}
+
 
 // Table of Contents
 
@@ -1375,8 +1412,6 @@ img.nba-headshot {
 }
 
 .table-rank {
-  //font-family: 'Undefined Medium', monospace;
-  //font-size: 1.5rem;
   text-align: right;
   color: var(--orange);
 }

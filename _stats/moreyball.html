@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Moreyball Percentage Tracker
+title: Moreyball Percentage Leaderboard
 photoloc: /assets/posts/moreyball
 sidebar: 
 toc: True
@@ -11,15 +11,11 @@ last_updated: 2025-01-18
 {% assign player_url = "https://www.nba.com/stats/player/" %}
 
 <p>
-  The leaderboard of the players with the highest <a href="/posts/moreyball-percentage">Moreyball percentage</a>, updated weekly on Mondays. 
-  Currently it's just a png generated through a weekly github action, though the plan is to update this to an interactive graph.
+  The leaderboard of the players with the highest <a href="/posts/moreyball-percentage">Moreyball percentage</a>, updated weekly on Mondays.
+  A more detailed table is available <a href="/stats/moreyball-full">here</a>, and the raw .csv is saved <a href="https://github.com/penborter/nba-data/blob/main/data/dynamic/NBA_Leaders_MOREYBALL_Rate.csv">here</a>.
 </p>
 
-{% include picture.html 
-  file = "plot.png"
-%}
-
-<h2>Leaderboard</h2>
+<h2>Moreyball % — Top 10 and Bottom 10 <span style="text-transform: none;">(min. 50 FGA)</span></h2>
 
 <table>
   <tr>
@@ -30,19 +26,53 @@ last_updated: 2025-01-18
     <th class="right">MB FGA</th>
   </tr>
 
-  {% for player in site.data.moreyball %}
+  {% assign first_ten = site.data.moreyball_full | slice: 0, 10 %}
+  {% assign last_ten = site.data.moreyball_full | slice: -10, 10 %}
+  {% assign total_count = site.data.moreyball_full | size %}
+  {% assign combined = first_ten | concat: last_ten %}
 
-    {% assign pct_split = player.mb_pct | round: 3 | split: "." %}
+  {% for player in combined %}
+
+    {% assign pct_split = player.MB_PCT | round: 3 | split: "." %}
     {% assign integral = pct_split[0] %}
     {% assign fractional = pct_split[1] | append: "00" | truncate: 3, "" %}
 
     <tr>
-      <td class="table-rank">{{ forloop.index }}</td>
-      <td><a href="{{ player_url}}{{ player.id }}">{{ player.name }}</a></td>
-      <td class="center team-col" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</td>
-      <td class="right">{{ integral }}.{{ fractional }}</td>
-      <td class="right">{{ player.mb_fga | round: 0 }}</td>
-    </tr>
 
+      <td class="table-rank">
+        {% if forloop.index <= 10 %}
+        {{ forloop.index }}
+      {% else %}
+        {{ total_count | minus: 10 | plus: forloop.index | minus: 10 }}
+      {% endif %}
+      </td>
+      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
+      <td class="center team-col"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="right">{{ integral }}.{{ fractional }}</td>
+      <td class="right">{{ player.MB_FGA | round: 0 }}</td>
+    </tr>
   {% endfor %}
 </table>
+
+<h2>Discussion</h2>
+<p>
+  <a href="https://www.youtube.com/shorts/i9_MxNIX05o">Dean W.</a> remains the league leader, as he has through most of the season. Those shots on the edge of the restricted area are suspect, though, and at least one of them was a floater where he took off from outside the restricted area.
+</p>
+
+<p>
+  Currently the below shot chart is just a .png generated through a scheduled GitHub action; the plan is to update this to an interactive graph at some point.
+</p>
+
+{% include picture.html 
+  file = "plot.png"
+%}
+
+<p>
+  For comparison, here's the shot chart for T.J. McConnell, who is currently (as of 2025-01-19) last in the league in MB%, at a low 39.1%. Note the backcourt heave dot behind his headshot.
+</p>
+
+{% include picture.html 
+  file = "TJ.png"
+%}
+
+

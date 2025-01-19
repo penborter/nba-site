@@ -1,0 +1,62 @@
+---
+layout: full_table
+title: Moreyball Full Data
+photoloc: /assets/posts/moreyball
+hide_sidebar: True
+last_updated: 2025-01-18
+---
+
+{% assign player_url = "https://www.nba.com/stats/player/" %}
+
+
+
+<table class="full-table">
+  <tr>
+    <th class="right">Rank</th>
+    <th class="left">Name</th>
+    <th class="center">
+      <select id="team-filter">
+        <option value="">Team</option>
+        {% assign teams = site.data.moreyball_full | map: "team" | uniq | sort %}
+        {% for team in teams %}
+            <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+      </select>
+    </th>
+    <th class="right">RA FGM</th>
+    <th class="right">RA FGA</th>
+    <th class="right">3PT FGM</th>
+    <th class="right">3PT FGA</th>
+    <th class="right">MB FGM</th>
+    <th class="right">MB FGA</th>
+    <th class="right sort-desc">MB%</th>
+    <th class="right">TOTAL FGM</th>
+    <th class="right">TOTAL FGA</th>
+  </tr>
+
+  {% assign bottom_ten = site.data.moreyball_full | slice: -10, 10 %}
+
+  {% for player in site.data.moreyball_full %}
+
+    {% assign pct_split = player.MB_PCT | round: 3 | split: "." %}
+    {% assign integral = pct_split[0] %}
+    {% assign fractional = pct_split[1] | append: "00" | truncate: 3, "" %}
+
+    <tr>
+      <td class="table-rank">{{ forloop.index }}</td>
+      <td><a href="{{ player_url}}{{ player.id }}">{{ player.name }}</a></td>
+      <td class="center team-col"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="right">{{ player.RA_FGM | round: 0 }}</td>
+      <td class="right">{{ player.RA_FGA | round: 0 }}</td>
+      <td class="right">{{ player.THREE_FGM | round: 0 }}</td>
+      <td class="right">{{ player.THREE_FGA | round: 0 }}</td>
+      <td class="right">{{ player.MB_FGM | round: 0 }}</td>
+      <td class="right">{{ player.MB_FGA | round: 0 }}</td>
+      <td class="right">{{ integral }}.{{ fractional }}</td>
+      <td class="right">{{ player.TOTAL_FGM | round: 0 }}</td>
+      <td class="right">{{ player.TOTAL_FGA | round: 0 }}</td>
+    </tr>
+
+  {% endfor %}
+</table>
+

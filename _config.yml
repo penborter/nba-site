@@ -32,6 +32,9 @@ social:
     - https://www.linkedin.com/in/penborter
 markdown: kramdown
 
+kramdown:
+  auto_ids: true
+
 # 5. Jekyll settings
 sass:
   style: compressed

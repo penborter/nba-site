@@ -1,6 +1,6 @@
 ---
 layout: list
 display_collection: posts
-by_date: true
+by_date:
 ---
 

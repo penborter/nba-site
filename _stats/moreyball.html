@@ -5,6 +5,7 @@ photoloc: /assets/posts/moreyball
 sidebar: 
 toc: True
 last_updated: 2025-01-18
+tags: moreyball
 ---
 
 {% assign pic_url = "https://cdn.nba.com/headshots/nba/latest/1040x760/" %}
@@ -15,15 +16,15 @@ last_updated: 2025-01-18
   A more detailed table is available <a href="/stats/moreyball-full">here</a>, and the raw .csv is saved <a href="https://github.com/penborter/nba-data/blob/main/data/dynamic/NBA_Leaders_MOREYBALL_Rate.csv">here</a>.
 </p>
 
-<h2>Moreyball % — Top 10 and Bottom 10 <span style="text-transform: none;">(min. 50 FGA)</span></h2>
+<h2 id="moreyball_pct">Moreyball % — Top 10 and Bottom 10 <span style="text-transform: none;">(min. 50 FGA)</span></h2>
 
 <table>
   <tr>
-    <th class="right">Rank</th>
+    <th class="right">No.</th>
     <th class="left">Name</th>
-    <th class="center">Team</th>
+    <th class="center narrow-remove">Team</th>
     <th class="right">MB%</th>
-    <th class="right">MB FGA</th>
+    <th class="right narrow-remove">MB FGA</th>
   </tr>
 
   {% assign first_ten = site.data.moreyball_full | slice: 0, 10 %}
@@ -47,20 +48,21 @@ last_updated: 2025-01-18
       {% endif %}
       </td>
       <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
-      <td class="center team-col"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
       <td class="right">{{ integral }}.{{ fractional }}</td>
-      <td class="right">{{ player.MB_FGA | round: 0 }}</td>
+      <td class="right narrow-remove">{{ player.MB_FGA | round: 0 }}</td>
     </tr>
   {% endfor %}
 </table>
 
-<h2>Discussion</h2>
+<h2 id="discussion_2024_01_28">Discussion — 2024-01-28</h2>
+<h3 id="players">Players</h3>
 <p>
-  <a href="https://www.youtube.com/shorts/i9_MxNIX05o">Dean W.</a> remains the league leader, as he has through most of the season. Those shots on the edge of the restricted area are suspect, though, and at least one of them was a floater where he took off from outside the restricted area.
+  John Konchar is now the league leader in MB%, taking over from <a href="https://www.youtube.com/shorts/i9_MxNIX05o">Dean W.</a> 
 </p>
 
 <p>
-  Currently the below shot chart is just a .png generated through a scheduled GitHub action; the plan is to update this to an interactive graph at some point.
+  Currently the below shot charts are just PNGs generated through a scheduled GitHub action; the plan is to update this to an interactive graph at some point.
 </p>
 
 {% include picture.html 
@@ -68,11 +70,18 @@ last_updated: 2025-01-18
 %}
 
 <p>
-  For comparison, here's the shot chart for T.J. McConnell, who is currently (as of 2025-01-19) last in the league in MB%, at a low 39.1%. Note the backcourt heave dot behind his headshot.
+  For comparison, here's the shot chart for T.J. McConnell, who is currently (as of 2025-01-19) last in the league in MB%, at a low 0.397. Note the backcourt heave dot behind his headshot.
 </p>
 
 {% include picture.html 
   file = "TJ.png"
 %}
 
+<h3 id="teams">Teams</h3>
+<p>
+  Cleveland holds four out of the top six spots on the leaderboard, then a big jump to Caris LeVert ranked 67<sup>th</sup> (MB% 0.845).
+</p>
+<p>
+  Houston's highest MB% player (Tari Eason) ranks only 144<sup>th</sup> in the league with a MB% of 0.782, the lowest ranking for a team leader in this weird stat. Interestingly, Dallas is second lowest, with Daniel Gafford leading the team with a still-respectable 0.800 (ranked 118<sup>th</sup>).
+</p>
 

@@ -12,20 +12,20 @@ $caption-wide: calc(1 / #{$pic-wide}); // fits the caption back to normal conten
 
 // 1.2 Main colours
 $light: hsl(35, 30%, 85%);
-$dark: hsl(25, 25%, 20%);
+$dark: hsl(25, 5%, 20%);
 $orange: hsl(20, 100%, 50%);
 
 
 // 2 Calculated Variables
 // 2.1 Main colours and accents
-$dark_accent_1: hsl(25, 15%, 50%);
-$dark_accent_2: hsl(25, 20%, 15%);
+$dark_accent_1: hsl(25, 5%, 50%);
+$dark_accent_2: hsl(25, 10%, 15%);
 $dark_text: $dark; // Just use $dark
-$light_accent_1: hsl(30, 100%, 85%);
+$light_accent_1: hsl(35, 30%, 60%);
 $light_accent_2: hsl(40, 50%, 85%);
 $light_text: hsl(24, 49%, 90%);
 $orange_accent_light: hsl(30, 100%, 75%);
-$orange_accent_dark: hsl(20, 100%, 35%);
+$orange_accent_dark: hsl(20, 50%, 25%);
 
 $dark-transparent-1: scale-color($dark, $alpha: -55%);
 $dark-transparent-2: scale-color($dark_accent_1, $alpha: -70%);
@@ -39,8 +39,29 @@ $light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
 :root {
 
   // Padding for narrow screen widths
-  --narrow-padding: max(1.5em, calc((100vw - #{$content-width}) / 2));
+  --narrow-padding: max(1rem, calc((100vw - #{$content-width}) / 2));
   --photo-padding: max(10px, calc(100vw / 2000));
+
+  --bg: #{$light};
+  --fg: #{$dark};
+
+  --bg-accent-1: #{$light_accent_1};
+  --bg-accent-2: #{$light_accent_2};
+
+  --fg-accent-1: #{$dark_accent_1};
+  --fg-text:     #{$dark_text};
+
+  --bg-transparent: #{$light-transparent-1};
+  --bg-accent-transparent: #{$light-transparent-2};
+
+  --shadow-color: rgba(0, 0, 0, 0.04);
+  --border-color: var(--fg-accent-1);
+
+  --orange: #{$orange};
+  --orange-accent: #{$orange_accent_light};
+}
+
+[data-theme="dark"] {
 
   --bg: #{$dark};
   --fg: #{$light};
@@ -57,37 +78,15 @@ $light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
   --shadow-color: rgba(0, 0, 0, 0.08);
   --border-color: var(--bg-accent-1);
 
-  --orange: #{$orange};
   --orange-accent: #{$orange_accent_dark};
-}
-
-[data-theme="dark"] {
-  --bg: #{$light};
-  --fg: #{$dark};
-
-  --bg-accent-1: #{$light_accent_1};
-  --bg-accent-2: #{$light_accent_2};
-
-  --fg-accent-1: #{$dark_accent_1};
-  --fg-text:     #{$dark_text};
-
-  --bg-transparent: #{$light-transparent-1};
-  --bg-accent-transparent: #{$light-transparent-2};
-
-  --shadow-color: rgba(0, 0, 0, 0.04);
-  --border-color: var(--fg-accent-1);
-
-  --orange-accent: #{$orange_accent_light};
 
   // Theme switch button
   .dark-icon {
-    //display: none;
-    opacity: 0%;
+    opacity: 100%;
   }
 
   .light-icon {
-    //display: block;
-    opacity: 100%;
+    opacity: 0%;
   }
 
   .dark-show {
@@ -115,42 +114,12 @@ $light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
   width: 100%;
 }
 
-.mb3 {
-  margin-bottom: 3em;
-}
-
 .border-top {
   border-top: 1px solid var(--orange-accent);
 }
 
-.border-bottom {
-  border-bottom: 1px solid var(--bg-accent-1);
-  padding-bottom: 1em;
-}
-
-.top-u1 {
-  top: -1rem;
-}
-
 .top-u2 {
   top: -1.5rem;
-}
-
-.top-u3 {
-  top: -2.89rem;
-}
-
-.mb-2 {
-  margin-bottom: 2em;
-}
-
-.upper {
-  text-transform: uppercase;
-}
-
-.rounded {
-  //border-radius: 10px;
-  //border: 1px solid var(--fg);
 }
 
 mark {
@@ -182,34 +151,6 @@ mark {
   }
 }
 
-.callout {
-  display: block;
-  padding: 1em;
-
-  //border-radius: 5px;
-  //border: 1px solid var(--color-main);
-  background: var(--color-bg);
-
-  text-decoration: none;
-
-  flex: 1 1 0px;
-  min-width: 145px;
-
-  h3 {
-    margin-top: 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  &:hover {
-    box-shadow: 0 2px 2px var(--shadow-color),
-                0 4px 4px var(--shadow-color),
-                0 8px 8px var(--shadow-color);;
-  }
-}
-
 .truncate {
   white-space: nowrap;
   overflow: hidden;
@@ -229,6 +170,18 @@ mark {
 
 .narrow-show {
   display: none;
+}
+
+.light-icon, .dark-icon {
+  position: absolute;
+
+  * {
+    fill: var(--bg-accent-1);
+  }
+}
+
+.dark-icon {
+  opacity: 0%;
 }
 
 // Defaults
@@ -292,14 +245,10 @@ article {
   p {
     color: var(--fg-text);
   }
-  .reading-meta p:first-child, p:first-child {
-    margin-top: 0;
-  }
 }
 
 #header-bar {
   grid-column: 1/-1;
-  //background: $orange;
   width: 100vw;
 
   p {
@@ -314,16 +263,8 @@ article {
 nav {
   font-size: 16px;
   font-weight: 500;
-  //position: relative;
-  //background: var(--bg-transparent);
-  //backdrop-filter: blur(10px);
 
-  //height: $navbar-height;
-
-  //margin: -0.3em -0.5em 0 -0.5em;
-  padding: 2em;
-
-  //border: 1px solid var(--bg);
+  padding: 0.5em 0;
 
   &:hover {
     filter: none;
@@ -371,7 +312,7 @@ nav {
   a, a:visited, .navName {
     padding: 0;
     text-decoration: none;
-    color: var(--fg-accent-1);
+    color: var(--bg-accent-1);
 
     &:hover {
       text-decoration: underline;
@@ -422,7 +363,7 @@ nav.locked {
 
   .sidebar_titles {
 
-    border-bottom: 1px solid var(--fg-accent-1);
+    border-bottom: 1px solid var(--bg-accent-1);
     h1 {
       margin-bottom: 0;
     }
@@ -500,7 +441,7 @@ a.footnote {
 
 .post-footer {
   //padding-top: 0.5em;
-  color: var(--fg-accent-1);
+  color: var(--bg-accent-1);
 }
 
 .post-nav {
@@ -534,15 +475,6 @@ a.footnote {
 
 .prev-page p {
   padding-right: 0.5em;
-}
-
-.post-publish {
-  color: var(--bg-accent-1);
-
-  p {
-    text-align: right;
-    margin: 0;
-  }
 }
 
 blockquote, .footnotes {
@@ -588,18 +520,18 @@ div.highlighter-rouge {
 .tag {
   text-decoration: none;
   padding: 0.3em 0.7em;
-  //border-radius: 20px;
+  border-radius: 5px;
 
   background-color: var(--bg);
-  color: var(--fg-accent-1);
-  border: 1px solid var(--fg-accent-1);
+  color: var(--bg-accent-1);
+  border: 1px solid var(--bg-accent-1);
 
   transition: 0.1s ease;
 
   &:hover {
     color: var(--fg);
     background: var(--orange-accent);
-    border: 1px solid var(--fg-accent-1);
+    border: 1px solid var(--fg);
     box-shadow: 0 2px 2px var(--shadow-color),
                 0 4px 4px var(--shadow-color),
                 0 8px 8px var(--shadow-color);
@@ -631,43 +563,11 @@ footer {
   }
 }
 
-.gallery-meta footer {
-  left: 0;
-}
-
 .top-return {
   position: sticky;
   bottom: 3em;
   padding-left: 4.5em;
 }
-
-.book-cat-wrap {
-
-  .list-cat {
-    text-align: right;
-    position: sticky;
-    top: calc(65px + 4.5em - 0.3em);
-
-    margin-left: -5.1em;
-    width: fit-content;
-
-    h1 {
-      margin: 0;
-    }
-
-    .number {
-      position: inherit;
-      top: auto;
-      display: block;
-      //font-weight: 400;
-    }
-  }
-
-  .list-cat-container {
-    top: -4.1em;
-  }
-}
-
 
 // "Lists" Layout
 
@@ -715,15 +615,6 @@ footer {
   }
 }
 
-.aligned {
-  position: inherit;
-}
-
-.tag-date {
-  font-weight: 500;
-  margin-left: 0.5em;
-}
-
 // List cards
 
 .card-collection {
@@ -751,61 +642,6 @@ footer {
   margin-top: 0.5em;
 }
 
-// Home Page
-
-.nav-about {
-  font-size: 18px;
-  font-weight: 500;
-  padding-left: 0;
-
-  li {
-    display: block;
-    padding-left: 0;
-  }
-}
-
-#intro-heading {
-  margin-top: 0;
-}
-
-#links-about {
-  display: flex;
-  flex-wrap: wrap;
-  grid-gap: 0.5em;
-
-  margin: 1em 0;
-}
-
-// "Book" Layout
-
-.book-intro {
-  margin: 4.5rem 0;
-
-  h1 {
-    margin: 0;
-  }
-}
-
-.strong {
-  font-weight: 550;
-}
-
-.list-cat-container .author {
-  font-weight: 400;
-  margin: -1em 0;
-  margin-bottom: 1em;
-  font-size: 1em;
-}
-
-.starred {
-  list-style-type: "★";
-  display: list-item;
-
-  &::marker {
-    color: var(--bg-accent-1);
-  }
-}
-
 // Figures
 
 figure {
@@ -819,59 +655,15 @@ figure {
 figcaption {
   font-size: 0.85em;
   margin-top: 1em;
-  
-  grid-column: 1 / -1;
 }
 
 img {
   width: 100%;
-  //box-shadow: 0 2px 2px var(--shadow-color), 
-  //             0 4px 4px var(--shadow-color), 
-  //             0 8px 8px var(--shadow-color);
-  //border: 1px solid var(--fg);
-  //border-radius: 10px;
-}
-
-img:not(.img-gallery) {
-  display: block;
 }
 
 .video {
   margin: 1em 0 2em 0;
 }
-
-iframe {
-  width: $content-width;
-  height: calc( #{$content-width} / 1.77777778 );
-}
-
-.pic-wide {
-  figure {
-    margin: 0;
-  }
-}
-
-.gallery + .gallery {
-  margin-top: 1em;
-}
-
-
-// Hover / swap functionality for posts
-
-.pic-hover-show {
-  display: none;
-}
-
-.hover:hover {
-  .pic-hover-show {
-    display: block;
-  }
-
-  .pic-hover-hide {
-    display: none;
-  }
-}
-
 
 // Tables
 
@@ -909,7 +701,6 @@ th {
 }
 
 tr {
-
   &:nth-child(10n + 2) {
     *::before {
       height: 1em;
@@ -918,7 +709,7 @@ tr {
       background: transparent;
     }
   }
-  //height: 35px;
+
   background: var(--bg);
 
   &:hover:not(thead tr) {
@@ -937,10 +728,6 @@ tr {
   .right {
     text-align: right;
   }
-}
-
-tr:nth-child(even) {
-  //background: var(--bg-accent-2);
 }
 
 td {
@@ -1005,13 +792,8 @@ select#team-filter {
   font-size: 15px;
   line-height: 1.7;
 
-  &:hover {
-    background: var(--bg-transparent);
-    backdrop-filter: blur(5px);
-  }
-
   &:hover * {
-    color: var(--fg-accent-1) !important;
+    color: var(--fg) !important;
   }
 
   * {
@@ -1048,6 +830,7 @@ select#team-filter {
       line-height: 1.2;
       margin-top: 0.3em;
       margin-bottom: 0.8em;
+      padding-left: 0.5em;
     }
   }
 }
@@ -1095,7 +878,7 @@ select#team-filter {
     border: none;
     width: 100vw;
 
-    padding: 2em var(--narrow-padding) 0em var(--narrow-padding);
+    padding: var(--narrow-padding);
   }
 
   nav {
@@ -1104,7 +887,7 @@ select#team-filter {
     padding: 1em 0;
 
     a, a:visited {
-      color: var(--fg-accent-1);
+      color: var(--bg-accent-1);
     }
 
     .navName {
@@ -1139,7 +922,10 @@ select#team-filter {
   }
 
   .sidebar {
-    display: none;
+    display: block;
+    position: initial;
+    padding: 0 var(--narrow-padding);
+    height: fit-content;
   }
 
   .list-cat .number {
@@ -1154,9 +940,26 @@ select#team-filter {
     }
   }
 
+  .sidebar_titles {
+    padding: var(--narrow-padding);
+    background: var(--orange-accent);
+
+    p {
+      margin: 0;
+    }
+  }
+
   h1 {
     margin: 0;
     font-size: 2rem;
+
+    //padding-top: var(--narrow-padding);
+    width: 100%;
+  }
+
+  #intro-heading {
+    background: none;
+    padding: 0;
   }
 
   h2, h3 {
@@ -1197,7 +1000,13 @@ select#team-filter {
 
   footer {
     margin: 0;
+    padding: 0;
     display: block;
+
+    p {
+      padding: var(--narrow-padding);
+      margin: 0;
+    }
   }
 
   .post-nav {
@@ -1227,46 +1036,6 @@ select#team-filter {
   .col-2 {
     height: auto;
   }
-
-  iframe {
-    width: calc(100vw - (2 * var(--narrow-padding)));
-  }
-
-  .horizontal-gallery-wrapper {
-    overflow: visible;
-    white-space: normal;
-    padding: 0 var(--narrow-padding);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 1em;
-
-    background-color: var(--bg);
-    height: fit-content;
-
-    .gallery-meta {
-      display: block;
-      padding: 3rem 0 0 0;
-      width: auto;
-      height: auto;
-
-      footer {
-        display: none;
-      }
-    }
-
-    .image-wrapper {
-      display: contents;
-      height: auto;
-    }
-
-    .img-gallery {
-      height: auto;
-      max-width: 90vw;
-      max-height: 90vh;
-    }
-  }
 }
 
 // Removing nav elements at really narrow widths
@@ -1291,33 +1060,6 @@ button {
 
 p button {
   margin: 0;
-}
-
-.light-icon, .dark-icon {
-  position: absolute;
-
-  * {
-    fill: var(--bg-accent-1);
-  }
-}
-
-.light-icon {
-  opacity: 0%;
-}
-
-.dark-icon {
-  opacity: 100%;
-}
-
-.about-button {
-  position: relative;
-  top: -2.4em;
-  left: 14.4em;
-  margin: -1em;
-
-  button {
-    margin: 0;
-  }
 }
 
 
@@ -1355,51 +1097,7 @@ p button {
   }
 }
 
-
 // NBA
-
-#moreyball_list {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  border-right: 2px dashed var(--bg-accent-1);
-}
-
-.nba-player {
-  display: flex;
-  height: 102px;
-  width: var(--var);
-  //border: 1px solid var(--fg);
-  //border-radius: 10px;
-  background: var(--bg-accent-1);
-  //padding-top: 0.4em;
-  padding-left: 1em;
-  //box-shadow: 0 2px 2px var(--shadow-color), 0 4px 4px var(--shadow-color), 0 8px 8px var(--shadow-color);
-
-  transition: 0.1s ease;
-
-  &:not(:last-child) {
-    margin-bottom: 1em;
-  }
-
-  &:hover {
-    box-shadow: 0 2px 2px var(--shadow-color), 
-                0 4px 4px var(--shadow-color), 
-                0 8px 8px var(--shadow-color), 
-                0 16px 16px var(--shadow-color);
-    transform: scale(1.01);
-  }
-
-  img {
-    height: 100px;
-    padding-top: 0.4em;
-    width: fit-content;
-    border: none;
-    box-shadow: none;
-    z-index: 1;
-  }
-}
-
 img.nba-headshot {
   height: 75px;
   width: fit-content;
@@ -1414,14 +1112,4 @@ img.nba-headshot {
 .table-rank {
   text-align: right;
   color: var(--orange);
-}
-
-.ranking {
-  position: relative;
-  left: -9rem;
-  font-size: 8.5em;
-  line-height: 0.75;
-  font-weight: 800;
-  color: var(--bg-transparent);
-  overflow: hidden;
 }

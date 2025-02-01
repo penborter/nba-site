@@ -1,7 +1,9 @@
 <div class="sidebar{% if page.url contains 'photos' %} locked{% endif %}">
 
+  {% include navigation.html %}
+
   {% if page.layout == "post" %}
-  <div class="post-footer">
+  <div class="post-footer narrow-remove">
 
     {% if page.tags %}
       <ul class="flexbox">
@@ -19,7 +21,7 @@
   {% if page.toc == true %}
     <div class="toc narrow-remove">
       {% include toc.html html=content h_min=2 %}
-      <a href="#" class="toc-return">Return to top ⤴</a>
+      <a href="#" class="toc-return">Return to top ▲</a>
     </div>
   {% endif%}
 

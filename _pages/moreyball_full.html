@@ -1,9 +1,8 @@
 ---
 layout: full_table
-title: Moreyball Full Data
-photoloc: /assets/posts/moreyball
+title: Complete Moreyball Data
 hide_sidebar: True
-last_updated: 2025-01-18
+permalink: /stats/moreyball-full
 ---
 
 {% assign player_url = "https://www.nba.com/stats/player/" %}
@@ -33,8 +32,6 @@ last_updated: 2025-01-18
     <th class="right">TOTAL FGM</th>
     <th class="right">TOTAL FGA</th>
   </tr>
-
-  {% assign bottom_ten = site.data.moreyball_full | slice: -10, 10 %}
 
   {% for player in site.data.moreyball_full %}
 

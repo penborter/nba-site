@@ -1,0 +1,49 @@
+---
+layout: full_table
+title: Complete Distance Data
+hide_sidebar: True
+permalink: /stats/distance-full
+---
+
+{% assign player_url = "https://www.nba.com/stats/player/" %}
+
+<table class="full-table">
+  <tr>
+    <th class="right">Rank</th>
+    <th class="left">Name</th>
+    <th class="center">
+      <select id="team-filter">
+        <option value="">Team</option>
+        {% assign teams = site.data.distance | map: "team" | uniq | sort %}
+        {% for team in teams %}
+            <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+      </select>
+    </th>
+    <th class="right">GMs</th>
+    <th class="right">Total Minutes</th>
+    <th class="right">Total Miles</th>
+    <th class="right sort-desc">Miles / 36</th>
+    <th class="right">Miles / GM</th>
+    <th class="right">Marathons</th>
+    <th class="right">Avg. Speed (MPH)</th>
+  </tr>
+
+  {% for player in site.data.distance %}
+
+    <tr>
+      <td class="table-rank">{{ forloop.index }}</td>
+      <td><a href="{{ player_url}}{{ player.id }}">{{ player.name }}</a></td>
+      <td class="center team-col"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="right">{{ player.games | round: 0 }}</td>
+      <td class="right">{{ player.minutes | round: 1 }}</td>
+      <td class="right">{{ player.miles | round: 2 }}</td>
+      <td class="right">{{ player.miles_per_thirty | round: 2 }}</td>
+      <td class="right">{{ player.miles_per_game | round: 2 }}</td>
+      <td class="right">{{ player.marathons | round: 2 }}</td>
+      <td class="right">{{ player.avg_speed | round: 2 }}</td>
+    </tr>
+
+  {% endfor %}
+</table>
+

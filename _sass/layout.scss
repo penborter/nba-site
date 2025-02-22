@@ -206,7 +206,7 @@ body {
   a {
     color: var(--fg);
     text-underline-offset: 3px;
-    text-decoration-color: var(--orange);
+    text-decoration-color: var(--bg-accent-1);
     text-decoration-thickness: 1.5px;
 
     &:not(nav a, .tag, .card, .list-cat-link, figure a, .image-wrapper a):hover {

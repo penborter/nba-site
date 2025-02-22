@@ -1,0 +1,50 @@
+---
+layout: post
+title: Miles Leaderboard
+toc: True
+tags: [tracking]
+---
+
+{% assign pic_url = "https://cdn.nba.com/headshots/nba/latest/1040x760/" %}
+{% assign player_url = "https://www.nba.com/stats/player/" %}
+
+<p>
+  The leaderboard of the players with the further distance run per game, updated weekly on Mondays.
+  A more detailed table is available <a href="/stats/distance-full">here</a>, and the raw .csv is saved <a href="https://github.com/penborter/nba-data/blob/main/data/dynamic/NBA_Leaders_Distance">here</a>.
+</p>
+
+<h2 id="moreyball_pct">Miles / 36 — Top 10 and Bottom 10 <span style="text-transform: none;">(min. 500 minutes)</span></h2>
+
+<table>
+  <tr>
+    <th class="right">No.</th>
+    <th class="left">Name</th>
+    <th class="center narrow-remove">Team</th>
+    <th class="right">Miles / 36</th>
+    <th class="right narrow-remove">Total Miles</th>
+  </tr>
+
+  {% assign first_ten = site.data.distance | slice: 0, 10 %}
+  {% assign last_ten = site.data.distance | slice: -10, 10 %}
+  {% assign total_count = site.data.distance | size %}
+  {% assign combined = first_ten | concat: last_ten %}
+
+  {% for player in combined %}
+
+    <tr>
+
+      <td class="table-rank">
+        {% if forloop.index <= 10 %}
+        {{ forloop.index }}
+      {% else %}
+        {{ total_count | minus: 10 | plus: forloop.index | minus: 10 }}
+      {% endif %}
+      </td>
+      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
+      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="right">{{ player.miles_per_thirty | round: 2 }}</td>
+      <td class="right narrow-remove">{{ player.miles | round: 2 }}</td>
+    </tr>
+  {% endfor %}
+</table>
+

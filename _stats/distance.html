@@ -31,6 +31,10 @@ tags: [tracking]
 
   {% for player in combined %}
 
+    {% assign mpt_split = player.miles_per_thirty | round: 2 | split: "." %}
+    {% assign integral = mpt_split[0] %}
+    {% assign fractional = mpt_split[1] | append: "00" | truncate: 2, "" %} 
+
     <tr>
 
       <td class="table-rank">
@@ -42,9 +46,19 @@ tags: [tracking]
       </td>
       <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
       <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
-      <td class="right">{{ player.miles_per_thirty | round: 2 }}</td>
+      <td class="right">{{ integral }}.{{ fractional }}</td>
       <td class="right narrow-remove">{{ player.miles | round: 2 }}</td>
     </tr>
   {% endfor %}
 </table>
 
+<h2>Discussion 2025-02-23</h2>
+
+<p>
+  As you can imagine, the Knicks' starters lead the league in total miles run. 
+  Miles Bridges, Josh Hart, and Jalen Brunson are the top three in the league, with Bridges having run an equivalent of more than 6 marathons at the time of writing.
+</p>
+
+<p>
+  Miles per game is a little different, with the Knicks interspersed with other speedy players 
+</p>

@@ -1,17 +1,61 @@
 ---
 layout: page
-title: Hello
 permalink: /
 ---
+
+{% assign dis_first_three = site.data.distance | slice: 0, 3 %}
+{% assign mbp_first_three = site.data.moreyball_full | slice: 0, 3 %}
 
 <h1 id="intro-heading">Welcome to the NBA side of the site.</h1>
 <p>
   If you're not that keen on the National Basketball Association, you can return to the main site <a href="https://ben.report">here</a>, or in the sidebar. 
 </p>
-<h2>🏀🚧 Currently under construction! 🚧🏀</h2>
+
+<h2>Leaderboards</h2>
+
+<p>Random stats, odds and ends, updated weekly every Monday:</p>
+
+<h3><a href="/stats/moreyball">Moreyball Leaderboard — MB%</a></h3>
+<a class="leaderboard-summary" href="/stats/moreyball">
+  {% for player in mbp_first_three %}
+    <div class="summary-item" style="--rank: '{{ forloop.index }}'">
+      <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/{{ player.id }}.png">
+      <div class="player-info">
+        <span class="player-name">{{ player.name }}</span>
+        <div class="player-right">
+          <span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span>
+          <span>{{ player.MB_PCT }}</span>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</a>
+
+<h3><a href="/stats/distance">Distance Leaderboard — Miles / 36 min</a></h3>
+<a class="leaderboard-summary" href="/stats/distance">
+  {% for player in dis_first_three %}
+
+  {% assign mpt_split = player.miles_per_thirty | round: 2 | split: "." %}
+  {% assign integral = mpt_split[0] %}
+  {% assign fractional = mpt_split[1] | append: "00" | truncate: 2, "" %} 
+
+    <div class="summary-item" style="--rank: '{{ forloop.index }}'">
+      <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/{{ player.id }}.png">
+      <div class="player-info">
+        <span class="player-name">{{ player.name }}</span>
+        <div class="player-right">
+          <span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span>
+          <span>{{ integral }}.{{ fractional }}</span>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</a>
+
+<h2>🏀🚧 Still under construction! 🚧🏀</h2>
 
 <p>
-  For now, you might be interested in some old posts:
+  For now, you might also be interested in some old posts:
   <ul>
     <li><a href="{{ site.home_url }}/posts/second-ft">Should bad free throw shooters miss on purpose?</a></li>
     <li><a href="{{ site.home_url }}/posts/moreyball">2020 Moreyball All-Stars</a></li>

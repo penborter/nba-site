@@ -235,7 +235,7 @@ article>ul, ol {
 
 article {
   padding-bottom: 7em;
-  padding-top: 1.5rem;
+  padding-top: 2em;
   grid-column: 3;
 
   &> :first-child {
@@ -258,6 +258,10 @@ article {
 
 .nav-box {
   grid-column: 2;
+
+  &:not(.sidebar .nav-box) {
+    padding: 1.5em 2em;
+  }
 }
 
 nav {
@@ -295,7 +299,7 @@ nav {
     margin: 0 -1.1em;
 
     li:not(:last-child) {
-      padding-right: 0.5em;
+      padding-right: 0.75em;
     }
   }
 
@@ -378,6 +382,10 @@ nav.locked {
       border-top: 0;
     }
   }
+}
+
+.sidebar_titles p {
+  margin: 0.5rem 0 0 0;
 }
 
 .sidebar.locked {
@@ -567,6 +575,70 @@ footer {
   position: sticky;
   bottom: 3em;
   padding-left: 4.5em;
+}
+
+// "About" page
+
+.leaderboard-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+
+  text-decoration: none;
+
+  .summary-item {
+    border: 1px solid var(--bg-accent-1);
+    border-radius: 5px;
+    background: var(--bg-accent-2);
+    padding: 0.5em;
+
+    position: relative;
+
+    &::before {
+      position: absolute;
+      content: var(--rank);
+      top: -0.1em;
+      font-size: 5rem;
+      font-weight: 800;
+      color: var(--orange-accent);
+    }
+
+    &:hover {
+      background-color: var(--orange-accent);
+      box-shadow: 0 2px 2px var(--shadow-color),
+      0 4px 4px var(--shadow-color),
+      0 8px 8px var(--shadow-color);
+
+      border: 1px solid var(--fg);
+
+      &::before {
+        color: var(--orange);
+      }
+
+      .player-info {
+        border-top: 1px solid var(--fg);
+      }
+    }
+
+    .player-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      padding-top: 0.5em;
+      border-top: 1px solid var(--bg-accent-1);
+
+      .player-name {
+        font-size: 1.2rem;
+      }
+
+      .player-right {
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+      }
+    }
+  }
 }
 
 // "Lists" Layout

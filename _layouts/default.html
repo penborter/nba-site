@@ -19,7 +19,7 @@
             <h2>{{ page.subtitle }}</h2>
           {% endif %}
 
-          {% if page.date %}
+          {% if page.has_date %}
             <p>{{ page.date | date: "%Y-%m-%d" }}</p>
           {% endif %}
         </div>

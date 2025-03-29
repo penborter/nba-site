@@ -595,6 +595,7 @@ footer {
     position: relative;
 
     &::before {
+      z-index: 1;
       position: absolute;
       content: var(--rank);
       top: -0.1em;
@@ -618,6 +619,11 @@ footer {
       .player-info {
         border-top: 1px solid var(--fg);
       }
+    }
+
+    img {
+      z-index: 5;
+      position: relative;
     }
 
     .player-info {
@@ -847,7 +853,7 @@ th, tr {
 }
 
 select#team-filter {
-  font-family: 'Departure Mono', monospace;
+  font-family: 'JetBrains Mono', monospace;
   border: none;
   background: var(--bg);
   font-size: 16.5px;
@@ -1107,6 +1113,24 @@ select#team-filter {
 
   .col-2 {
     height: auto;
+  }
+
+  .leaderboard-summary {
+    grid-template-columns: 1fr 1fr;
+
+    & > :last-child {
+      display: none;
+    }
+  }
+  
+  .player-info {
+    flex-direction: column;
+
+    .player-right {
+      flex-direction: row !important;
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 }
 

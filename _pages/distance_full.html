@@ -31,6 +31,14 @@ permalink: /stats/distance-full
 
   {% for player in site.data.distance %}
 
+    {% assign mpt_split = player.miles_per_thirty | round: 3 | split: "." %}
+    {% assign mpt_integral = mpt_split[0] %}
+    {% assign mpt_fractional = mpt_split[1] | append: "000" | truncate: 3, "" %} 
+
+    {% assign mar_split = player.marathons | round: 3 | split: "." %}
+    {% assign mar_integral = mar_split[0] %}
+    {% assign mar_fractional = mar_split[1] | append: "000" | truncate: 3, "" %} 
+
     <tr>
       <td class="table-rank">{{ forloop.index }}</td>
       <td><a href="{{ player_url}}{{ player.id }}">{{ player.name }}</a></td>
@@ -38,9 +46,9 @@ permalink: /stats/distance-full
       <td class="right">{{ player.games | round: 0 }}</td>
       <td class="right">{{ player.minutes | round: 1 }}</td>
       <td class="right">{{ player.miles | round: 2 }}</td>
-      <td class="right">{{ player.miles_per_thirty | round: 2 }}</td>
+      <td class="right">{{ mpt_integral }}.{{ mpt_fractional }}</td>
       <td class="right">{{ player.miles_per_game | round: 2 }}</td>
-      <td class="right">{{ player.marathons | round: 2 }}</td>
+      <td class="right">{{ mar_integral }}.{{ mar_fractional }}</td>
       <td class="right">{{ player.avg_speed | round: 2 }}</td>
     </tr>
 

@@ -32,9 +32,9 @@ has_date: true
 
   {% for player in combined %}
 
-    {% assign mpt_split = player.miles_per_thirty | round: 2 | split: "." %}
+    {% assign mpt_split = player.miles_per_thirty | round: 3 | split: "." %}
     {% assign integral = mpt_split[0] %}
-    {% assign fractional = mpt_split[1] | append: "00" | truncate: 2, "" %} 
+    {% assign fractional = mpt_split[1] | append: "000" | truncate: 3, "" %} 
 
     <tr>
 

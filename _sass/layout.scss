@@ -59,6 +59,8 @@ $light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
 
   --orange: #{$orange};
   --orange-accent: #{$orange_accent_light};
+
+  background: var(--orange);
 }
 
 [data-theme="dark"] {
@@ -200,7 +202,7 @@ body {
   color: var(--fg);
   background-color: var(--fg);
 
-  margin: 0;
+  margin: 1em 0 0 0;
   counter-reset: sidenote; // Initialise sidenote counter
 
   a {
@@ -599,7 +601,7 @@ footer {
       position: absolute;
       content: var(--rank);
       top: -0.1em;
-      font-size: 5rem;
+      font-size: 6rem;
       font-weight: 800;
       color: var(--orange-accent);
     }
@@ -624,6 +626,7 @@ footer {
     img {
       z-index: 5;
       position: relative;
+      margin-bottom: -0.304em;
     }
 
     .player-info {
@@ -721,6 +724,10 @@ footer {
 }
 
 // Figures
+
+.pic-wide {
+  margin: 0 -120px;
+}
 
 figure {
   margin: 2em 0;
@@ -1170,11 +1177,11 @@ p button {
 
   span.narrow {
     margin-left: -0.6em;
-    margin-right: -0.1em;
+    //margin-right: -0.1em;
   }
 
   span#normal {
-    margin-right: calc(0.27px - 0.2em);
+    //margin-right: calc(0.27px - 0.2em);
   }
 
   span#hover {

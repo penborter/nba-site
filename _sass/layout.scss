@@ -7,7 +7,7 @@ $content-width: 650px; // width of main content column
 $navbar-height: 65px; // height of navbar
 $sidebar-width: 350px; // max width of sidebar
 
-$pic-wide: 200px; // margin amount for extra wide pictures
+$pic-wide: 125px; // margin amount for extra wide pictures
 $caption-wide: calc(1 / #{$pic-wide}); // fits the caption back to normal content width
 
 // 1.2 Main colours
@@ -355,9 +355,9 @@ nav.locked {
 
 .sidebar {
   position: sticky;
-  top: 0;
+  top: 1em;
   height: 100vh;
-  padding: 1.5em 2em;
+  padding: 1em 2em;
 
   grid-column: 2;
 
@@ -512,6 +512,10 @@ blockquote {
 *:not(pre) > code {
   font-weight: 600;
   letter-spacing: -0.015rem;
+  background: var(--bg-accent-2);
+  border-radius: 5px;
+  padding: 0.2em 0.3em;
+  margin: 0 -0.1em;
 }
 
 div.highlighter-rouge {
@@ -739,7 +743,11 @@ figure {
 
 figcaption {
   font-size: 0.85em;
-  margin-top: 1em;
+  //margin-top: 1em;
+}
+
+figure + figcaption {
+  margin-top: -1.5em;
 }
 
 img {
@@ -748,6 +756,15 @@ img {
 
 .video {
   margin: 1em 0 2em 0;
+}
+
+iframe {
+  aspect-ratio: 16 / 9;
+
+  margin: 0 calc(-1 * #{$pic-wide});
+  width: calc(#{$content-width} + 2 * #{$pic-wide});
+  height: auto;
+  border-radius: 5px;
 }
 
 // Tables

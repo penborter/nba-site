@@ -9,21 +9,21 @@ has_date: true
 
 How many ways are there to turn the ball over in a basketball game?
 
-NBA play-by-play data tags each and every game action with two categories:
+NBA play-by-play data tags each and every game action with two fields:
 
 `EVENTMSGTYPE`: Play type (e.g. made shot, free throw, rebound)
 `EVENTMSGACTIONTYPE`: Play sub-category (e.g. 3PT shot; def. rebound)
 
-The `EVENTMSGTYPE` for turnovers is `7`. Within this play type, there are at least 28 sub-categories, meaning the NBA tracks almost 30[^1] different types of turnovers. 
+Each play type in `EVENTMSGTYPE` is given a code, for example, the number for turnovers is `7`. Within this play type, there are at least 28 play subcategories, each with their own `EVENTMSGACTIONTYPE` code, meaning the NBA tracks almost 30[^1] different types of turnovers. 
 
-There's no rhyme or reason[^2] to where the actual numbers for each sub-category comes from: lower isn't more common, it's not alphabetical, and there are large gaps between category codes. Unless otherwise mentioned from here on in, the `#XX` number listed with each turnover type is that type's `EVENTMSGACTIONTYPE`. 
+There's no rhyme or reason[^2] to where the actual code for each sub-category comes from: lower isn't more common, it's not ordered alphabetically, and there are large gaps between the codes. Unless otherwise mentioned from here on in, the `#XX` code listed with each turnover type is that play subcategory's `EVENTMSGACTIONTYPE`. 
 
 Anyway, let's explore!
 
 ## Standard Turnovers
-We'll go through 11 different types of weird and wacky turnovers below; this section is just for the standard stuff. About half of the categories then are just different ways to capture what I'd consider standard-fare turnovers: travelling (#4); throwing the ball out of bounds (#45); stepping out of bounds (#39); going out of bounds some other way (#40); backcourt, lane, and kicked ball violations (#13, #17 and #19); having the ball stolen (#1 and #2); goaltending (#15); committing an offensive foul (#36 and #37) (including illegal screens but not including [off-ball fouls](#0--turnover-turnover)); double dribbling, two ways (#6 and #7); and palming the ball (#21).
+We'll go through 12 different types of weird and wacky turnovers below; this section is just for the standard stuff. About half of the categories then are just different ways to capture what I'd consider standard-fare turnovers: travelling (#4); throwing the ball out of bounds (#45); stepping out of bounds (#39); going out of bounds some other way (#40); backcourt, lane, and kicked ball violations (#13, #17 and #19); having the ball stolen (#1 and #2); goaltending (#15); committing an offensive foul (#36 and #37) (including illegal screens but not including [off-ball fouls](#0--turnover-turnover)); double dribbling, two ways (#6 and #7); and palming the ball (#21).
 
-We don't need to go into detail on these too much more, except to say that palming is just another name for carrying.
+We don't need to go into any more detail on these, except to say that palming is just another name for carrying.
 
 
 ## Time Violations
@@ -34,7 +34,7 @@ On offense, you can time out in five ways:
 - after 10 seconds, too slow to take a free throw (#24); or
 - after 24 seconds, when the shot clock runs out (#11).
 
-The 10 second violation had its popular moment a couple of years ago when people noticed the length of Giannis' free throw routine, and opposing crowds started counting out the ten seconds every time he ended up at the line. Only was recorded this year — incorrectly[^3] — attributed to Duncan Robinson where he actually just stepped out of bounds (#39). 
+The 10 second violation had its popular moment a couple of years ago when people noticed the length of Giannis' free throw routine, and opposing crowds started counting out the ten seconds every time he ended up at the line. Only one was recorded this year — incorrectly[^3] — attributed to Duncan Robinson where he actually just stepped out of bounds (#39).
 
 The other ones are fairly self-explanatory, with most to least common in descending order of length (i.e. 24 seconds the commonest, 3 seconds the least). 
 
@@ -46,7 +46,7 @@ Cryptic name, basic situation (unfortunately): an off-ball offensive foul that i
 The only one recorded this year was by Isaac Jones on the Kings, for [taking out Wembanyama](https://videos.nba.com/nba/pbp/media/2024/12/01/0022400313/537/aa222d26-cd7b-7d6c-8204-9e9ee53a2d5c_1280x720.mp4) on the way to a loose ball. 
 
 ## #12 — Inbound Turnover
-Beyond the more typical 5-second violation, the NBA rulebook section on inbounding violations has a few wrinkles that are more interesting. These are collected under a category called "inbound turnover". 
+Beyond the more typical 5-second violation, the NBA rulebook section on inbounding violations (quoted below) has a few wrinkles that are more interesting. These are collected under a category called "inbound turnover". 
 
 If you inbound the ball straight into the hoop, it's a turnover. Bad luck, no points. Same if you throw it out of bounds without it touching anyone else. Unlike a normal out of bounds, the other team gets the ball at the spot of the inbound, not where it went out. You can't hand it off, and you can't carry in on yourself. And definitely, absolutely make sure that at least one foot is behind the line before you throw the ball.
 
@@ -140,7 +140,7 @@ Only recorded once this last season, early on by the Pistons. As far as I can te
 
 {% include picture.html
   file="pistons.png"
-  caption="The Pistons turn the ball over trying to sneak a sixth man on the floor."
+  caption="The Pistons trying to sneak a sixth man on the floor. Look at Malik Beasley, bottom left."
   class="wide"
 %}
 

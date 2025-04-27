@@ -11,14 +11,85 @@ has_date: true
 {% assign pic_url = "https://cdn.nba.com/headshots/nba/latest/1040x760/" %}
 {% assign player_url = "https://www.nba.com/stats/player/" %}
 
+{% assign first_ten = site.data.moreyball_full | slice: 0, 5 %}
+{% assign last_ten = site.data.moreyball_full | slice: -5, 5 %}
+{% assign total_count = site.data.moreyball_full | size %}
+{% assign combined = first_ten | concat: last_ten %}
+
 <p>
   The leaderboard of the players with the highest <a href="/posts/moreyball-percentage">Moreyball percentage</a>, updated weekly on Mondays.
   A more detailed table is available <a href="/stats/moreyball-full">here</a>, and the raw .csv is saved <a href="https://github.com/penborter/nba-data/blob/main/data/dynamic/NBA_Leaders_MOREYBALL_Rate.csv">here</a>.
 </p>
 
-<h2 id="moreyball_pct">Moreyball % — Top 10 and Bottom 10 <span style="text-transform: none;">(min. 100 FGA)</span></h2>
+<h2 id="moreyball_pct">Moreyball % — Top 5 and Bottom 5 <span style="text-transform: none;">(min. 100 FGA)</span></h2>
 
-<table>
+<div class="mb-leaderboard narrow-remove">
+  <div class="player-card">
+    <div class="player-info"></div>
+    <div class="card-body legend">
+      <div class="stat-box legend">% 3PT</div>
+      <div class="stat-box legend">% 3FT</div>
+      <div class="stat-box legend">% MID</div>
+    </div>
+  </div>
+
+  {% for player in combined %}
+
+    {% assign num = forloop.index %}
+    {% if forloop.index > 5 %}
+      {% assign num = total_count | minus: 5 | plus: forloop.index | minus: 5 %}
+    {% endif %}
+    {% assign num = num | prepend: "000" | slice: -3, 3 %}
+
+    {% assign mb = player.MB_PCT | times: 1000 | round %}
+    {% assign pct_3pt = player.THREE_PCT | times: 1000 | round %}
+    {% assign pct_3ft = mb | minus: pct_3pt %}
+    {% assign pct_2pt = 1000 | minus: mb %}
+
+    {% assign pct_3pt = pct_3pt | prepend: "000" | slice: -3, 3 %}
+    {% assign pct_3ft = pct_3ft | prepend: "000" | slice: -3, 3 %}
+    {% assign pct_2pt = pct_2pt | prepend: "000" | slice: -3, 3 %}
+
+
+    <div class="player-card">
+      <div class="player-info">
+        <div>
+          <span class="stacked-number">#{{ num }}</span>
+          <span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span>
+        </div>
+        <div class="media-container">
+          <img class="player-img" src="https://cdn.nba.com/headshots/nba/latest/1040x760/{{ player.id }}.png" alt="{{ player.name }}">
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="stat-box" style="--mb: {{ pct_3pt }};">
+          <span class="stacked-number">
+            {% for i in (0..2) %}
+              <span class="digit">{{ pct_3pt | slice: i, 1 }}</span>
+            {% endfor %}
+          </span>
+        </div>
+        <div class="stat-box" style="--mb: {{ pct_3ft }};">
+          <span class="stacked-number">
+            {% for i in (0..2) %}
+              <span class="digit">{{ pct_3ft | slice: i, 1 }}</span>
+            {% endfor %}
+          </span>
+        </div>
+        <div class="stat-box" style="--mb: {{ pct_2pt }};">
+          <span class="stacked-number">
+            {% for i in (0..2) %}
+              <span class="digit">{{ pct_2pt | slice: i, 1 }}</span>
+            {% endfor %}
+          </span>
+        </div>
+      </div>
+      <span class="player-name">{{ player.name }}</span>
+    </div>
+  {% endfor %}
+</div>
+
+<table class="narrow-show">
   <tr>
     <th class="right">No.</th>
     <th class="left">Name</th>
@@ -27,33 +98,32 @@ has_date: true
     <th class="right narrow-remove">MB FGA</th>
   </tr>
 
-  {% assign first_ten = site.data.moreyball_full | slice: 0, 10 %}
-  {% assign last_ten = site.data.moreyball_full | slice: -10, 10 %}
   {% assign total_count = site.data.moreyball_full | size %}
   {% assign combined = first_ten | concat: last_ten %}
 
   {% for player in combined %}
 
-    {% assign pct_split = player.MB_PCT | round: 3 | split: "." %}
-    {% assign integral = pct_split[0] %}
-    {% assign fractional = pct_split[1] | append: "00" | truncate: 3, "" %}
+  {% assign pct_split = player.MB_PCT | round: 3 | split: "." %}
+  {% assign integral = pct_split[0] %}
+  {% assign fractional = pct_split[1] | append: "00" | truncate: 3, "" %}
 
-    <tr>
+  <tr>
 
-      <td class="table-rank">
-        {% if forloop.index <= 10 %}
-        {{ forloop.index }}
-      {% else %}
-        {{ total_count | minus: 10 | plus: forloop.index | minus: 10 }}
-      {% endif %}
-      </td>
-      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
-      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
-      <td class="right">{{ integral }}.{{ fractional }}</td>
-      <td class="right narrow-remove">{{ player.MB_FGA | round: 0 }}</td>
-    </tr>
-  {% endfor %}
+    <td class="table-rank">
+      {% if forloop.index <= 5 %}
+      {{ forloop.index }}
+    {% else %}
+      {{ total_count | minus: 5 | plus: forloop.index | minus: 5 }}
+    {% endif %}
+    </td>
+    <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
+    <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+    <td class="right">{{ integral }}.{{ fractional }}</td>
+    <td class="right narrow-remove">{{ player.MB_FGA | round: 0 }}</td>
+  </tr>
+{% endfor %}
 </table>
+
 
 <h2 id="discussion_2024_03_29">Discussion — 2024-03-29</h2>
 <h3 id="players">Players</h3>

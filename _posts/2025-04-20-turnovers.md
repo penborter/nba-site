@@ -148,6 +148,6 @@ Only recorded once this last season, early on by the Pistons. As far as I can te
 In the end, the league tracks up to 30 separate turnover codes, but most plays fall into a familiar handful. Travels, steals, throw‑aways, and basic violations make up the bulk; the stranger entries (which are also the most interesting) show up only a few times all season. The next time you see “turnover” in a box score, remember there’s probably a story — and a specific `EVENTMSGACTIONTYPE` — behind it.
 
 
-[^1]: I'm assuming there are a couple more really irregular sub-categories that weren't logged this season.
+[^1]: I'm assuming there are a couple more really irregular sub-categories that weren't logged this season, like a five-second back to the basket violation.
 [^2]: None that've been publicly confirmed, anyway.
 [^3]: [Video is here.](https://videos.nba.com/nba/pbp/media/2025/01/02/0022400463/350/f90e30b2-2b62-298a-0f2a-78cd507f0a3d_960x540.mp4)

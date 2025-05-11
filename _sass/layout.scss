@@ -27,9 +27,9 @@ $light_text: hsl(24, 49%, 90%);
 $orange_accent_light: hsl(30, 100%, 75%);
 $orange_accent_dark: hsl(20, 50%, 25%);
 
-$dark-transparent-1: scale-color($dark, $alpha: -55%);
+$dark-transparent-1: scale-color($dark, $alpha: -45%);
 $dark-transparent-2: scale-color($dark_accent_1, $alpha: -70%);
-$light-transparent-1: scale-color($light_accent_2, $alpha: -55%);
+$light-transparent-1: scale-color($light, $alpha: -35%);
 $light-transparent-2: scale-color($light_accent_2, $alpha: -70%);
 
 // 2.2 CSS Variables
@@ -997,10 +997,19 @@ select#team-filter {
 
 .toc {
   margin-top: auto;
+  margin-bottom: 1em;
+
+  padding: 0.4em 0.4em 0 0;
+  border-radius: 10px;
 
   font-weight: 700;
   font-size: 15px;
   line-height: 1.7;
+
+  &:hover {
+    background-color: var(--bg-transparent);
+    backdrop-filter: blur(10px);
+  }
 
   &:hover * {
     color: var(--fg) !important;

@@ -1,0 +1,132 @@
+---
+layout: post
+title: Shot Distance Leaderboard
+toc: True
+tags: [tracking, distance]
+has_date: true
+---
+
+{% assign pic_url = "https://cdn.nba.com/headshots/nba/latest/1040x760/" %}
+{% assign player_url = "https://www.nba.com/stats/player/" %}
+
+<p>
+  Leaderboards of the players with the furthest shot distances (overall, from 3pt range, and from 2pt range) updated weekly on Mondays.
+  A more detailed table is available <a href="/stats/shot-distance-full">here</a>. All distances are in feet.
+</p>
+
+{% include shot_dist_violin.html %}
+
+<p>
+  AJ Green leads the league in average shot distance, about 3 inches away from having an average shot location behind the three point line (23.75 ft).
+  Then there are four more guys who average further than a corner three (22 ft), and a steady trickle down from there.
+</p>
+
+<p>
+  There's a narrowing out as you get closer to the rim for the guys, mostly centres, who don't shoot threes.
+  You'll notice that all of the bottom 10 in average shot distance haven't made—or, in many cases, attempted—a single three pointer, which is why the <code>Avg. Made 3PT Distance</code> column is blank.
+</p>
+
+<h2 id="shot_dist_overall">Average Shot Distance — Top 10 and Bottom 10 <span style="text-transform: none;">(min. 100 shots)</span></h2>
+
+<table>
+  <tr>
+    <th class="right">No.</th>
+    <th class="left">Name</th>
+    <th class="center narrow-remove">Team</th>
+    <th class="right">Avg. Shot Distance</th>
+    <th class="right narrow-remove">FGA</th>
+  </tr>
+
+  {% assign first_ten = site.data.shot_distance | sort: "all_avg_dist" | reverse | slice: 0, 10 %}
+  {% assign last_ten = site.data.shot_distance | sort: "all_avg_dist" | reverse |  slice: -10, 10 %}
+  {% assign total_count = site.data.shot_distance | size %}
+  {% assign combined = first_ten | concat: last_ten %}
+
+  {% for player in combined %}
+
+    <tr>
+
+      <td class="table-rank">
+        {% if forloop.index <= 10 %}
+        {{ forloop.index }}
+      {% else %}
+        {{ total_count | minus: 10 | plus: forloop.index | minus: 10 }}
+      {% endif %}
+      </td>
+      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
+      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="right">{{ player.all_avg_dist }}</td>
+      <td class="right narrow-remove">{{ player.fga }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+<h2 id="shot_make_3pt">Average 3PT Distance — Top 5 and Bottom 5 <span style="text-transform: none;">(min. 100 shots)</span></h2>
+
+<table>
+  <tr>
+    <th class="right">No.</th>
+    <th class="left">Name</th>
+    <th class="center narrow-remove">Team</th>
+    <th class="right">Avg. 3PT Made Dist.</th>
+    <th class="right narrow-remove">Avg. 3PT Miss Dist.</th>
+  </tr>
+
+  {% assign filtered = site.data.shot_distance | where_exp: "item", "item.made_thr_avg_dist != nil and item.made_thr_avg_dist != ''" %}
+  {% assign sorted = filtered | sort: "made_thr_avg_dist" | reverse %}
+  {% assign first_ten = sorted | slice: 0, 5 %}
+  {% assign last_ten = sorted | slice: -5, 5 %}
+  {% assign total_count = filtered | size %}
+  {% assign combined = first_ten | concat: last_ten %}  
+
+  {% for player in combined %}
+    <tr>
+      <td class="table-rank">
+        {% if forloop.index <= 5 %}
+        {{ forloop.index }}
+      {% else %}
+        {{ total_count | minus: 5 | plus: forloop.index | minus: 5 }}
+      {% endif %}
+      </td>
+      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
+      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="right">{{ player.made_thr_avg_dist }}</td>
+      <td class="right narrow-remove">{{ player.miss_thr_avg_dist }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+<h2 id="shot_make_3pt">Average 2PT Distance — Top 5 and Bottom 5 <span style="text-transform: none;">(min. 100 shots)</span></h2>
+
+<table>
+  <tr>
+    <th class="right">No.</th>
+    <th class="left">Name</th>
+    <th class="center narrow-remove">Team</th>
+    <th class="right">Avg. 2PT Made Dist.</th>
+    <th class="right narrow-remove">Avg. 2PT Miss Dist.</th>
+  </tr>
+
+  {% assign filtered = site.data.shot_distance | where_exp: "item", "item.made_two_avg_dist != nil and item.made_two_avg_dist != ''" %}
+  {% assign sorted = filtered | sort: "made_two_avg_dist" | reverse %}
+  {% assign first_ten = sorted | slice: 0, 5 %}
+  {% assign last_ten = sorted | slice: -5, 5 %}
+  {% assign total_count = filtered | size %}
+  {% assign combined = first_ten | concat: last_ten %}  
+
+  {% for player in combined %}
+    <tr>
+      <td class="table-rank">
+        {% if forloop.index <= 5 %}
+        {{ forloop.index }}
+      {% else %}
+        {{ total_count | minus: 5 | plus: forloop.index | minus: 5 }}
+      {% endif %}
+      </td>
+      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
+      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="right">{{ player.made_two_avg_dist }}</td>
+      <td class="right narrow-remove">{{ player.miss_two_avg_dist }}</td>
+    </tr>
+  {% endfor %}
+</table>

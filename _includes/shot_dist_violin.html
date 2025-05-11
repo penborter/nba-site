@@ -1,0 +1,131 @@
+<div id="shot-distance-beeswarm" class="narrow-remove">
+  <svg id="beeswarm-svg" width="700" height="200"></svg>
+  <div id="beeswarm-selectors">
+    <label for="loc-select">Location:</label>
+    <select id="loc-select">
+      <option value="all">all</option>
+      <option value="2pt">2pt</option>
+      <option value="3pt">3pt</option>
+    </select>
+    <label for="succ-select">Success:</label>
+    <select id="succ-select">
+      <option value="all">all</option>
+      <option value="made">made</option>
+      <option value="missed">missed</option>
+    </select>
+  </div>
+</div>
+
+<style>
+.tooltip {
+  position: absolute;
+  background: var(--orange-accent);
+  border: 1px solid var(--fg);
+  border-radius: 3px;
+  padding: 4px;
+  pointer-events: none;
+  font-size: 12px;
+}
+</style>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(function(){
+  const data = {{ site.data.shot_distance | jsonify }};
+  const colMap = {
+    '2pt':   {'all':'two_avg_dist','made':'made_two_avg_dist','missed':'miss_two_avg_dist'},
+    '3pt':   {'all':'thr_avg_dist','made':'made_thr_avg_dist','missed':'miss_thr_avg_dist'},
+    'all':   {'all':'all_avg_dist','made':'made_all_avg_dist','missed':'miss_all_avg_dist'}
+  };
+  const m = {top:30,right:30,bottom:30,left:40},
+        w = 700, h = 200,
+        y0 = (h - m.top - m.bottom)/2 + m.top;
+  const svg = d3.select('#beeswarm-svg');
+  const xAxis = svg.append('g')
+    .attr('transform',`translate(0,${h-m.bottom})`);
+
+  // tooltip
+  const tooltip = d3.select('#shot-distance-beeswarm')
+    .append('div').attr('class','tooltip').style('visibility','hidden');
+
+  // persistent nodes with initial v=all/all
+  const nodes = data.map(d=>({
+    name: d.name,
+    v: +d.all_avg_dist,
+    y: y0
+  })).filter(d=>!isNaN(d.v));
+
+  // compute initial beeswarm y positions via force once
+  const xInit = d3.scaleLinear().domain([0,30]).range([m.left, w-m.right]);
+  const sim = d3.forceSimulation(nodes)
+    .force('x', d3.forceX(d=>xInit(d.v)).strength(1))
+    .force('y', d3.forceY(y0).strength(1))
+    .force('collide', d3.forceCollide(4))
+    .stop();
+  for(let i=0;i<120;i++) sim.tick();
+  sim.stop(); // freeze y,d.x
+
+  // draw circles at computed y
+  svg.selectAll('circle.dot')
+    .data(nodes, d=>d.name)
+    .enter()
+    .append('circle')
+      .attr('class','dot')
+      .attr('r',5)
+      .attr('cy', d=>d.y)
+      .attr('fill','var(--orange-accent)')
+      .attr('stroke', 'var(--bg-accent-1)')
+      .on('mouseover',(e,d)=>{
+        tooltip.text(d.name).style('visibility','visible');
+      })
+      .on('mousemove',e=>{
+        tooltip.style('top',e.pageY-10+'px')
+               .style('left',e.pageX+10+'px');
+      })
+      .on('mouseout',()=>tooltip.style('visibility','hidden'));
+
+  function update(){
+    const loc = d3.select('#loc-select').node().value;
+    const succ = d3.select('#succ-select').node().value;
+    let domain = [0,30];
+    if(loc==='3pt') domain=[22,30];
+    else if(loc==='2pt') domain=[0,23.75];
+    const xScale = d3.scaleLinear().domain(domain).range([m.left, w-m.right]);
+    xAxis.transition().duration(300).call(d3.axisBottom(xScale));
+
+    // update v for each node
+    nodes.forEach(n=>{
+      const rec = data.find(d=>d.name===n.name);
+      const raw = +rec[colMap[loc][succ]];
+      n.v = isNaN(raw) ? domain[1]+2 : raw;
+    });
+
+    // tween cx only
+    svg.selectAll('circle.dot')
+      .data(nodes, d=>d.name)
+      .transition().duration(300)
+      .attr('cx', d=> xScale(d.v));
+    
+    // redraw refs
+    svg.selectAll('.ref').remove();
+    [[22,'CORNER 3PT'],[23.75,'MAIN 3PT']].forEach(([v,label],i)=>{
+      const y = m.top - 8 - i*14
+      svg.append('line')
+         .attr('class','ref')
+         .attr('x1',xScale(v)).attr('x2',xScale(v))
+         .attr('y1',m.top).attr('y2',h-m.bottom)
+         .attr('stroke','black').attr('stroke-dasharray','4,4');
+      svg.append('text')
+         .attr('class','ref')
+         .attr('font-size','12px')
+         .attr('x',xScale(v)+2)
+         .attr('y',y)
+         .text(label);
+    });
+  }
+
+  d3.select('#loc-select').on('change', update);
+  d3.select('#succ-select').on('change', update);
+  update();
+})();
+</script>

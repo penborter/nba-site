@@ -984,12 +984,24 @@ th, tr {
   color: var(--fg);
 }
 
-select#team-filter {
-  font-family: 'JetBrains Mono', monospace;
-  border: none;
+select {
+  border: 1px solid var(--fg);
   background: var(--bg);
-  font-size: 16.5px;
+  border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace;
   letter-spacing: -0.02em;
+  text-transform: uppercase;
+
+  &#team-filter {
+    border: none;
+    font-size: 16.5px;
+  }
+}
+
+// Shot distance plot
+
+#shot-distance-beeswarm {
+  margin: 2em 0;
 }
 
 

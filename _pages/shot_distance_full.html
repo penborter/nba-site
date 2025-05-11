@@ -1,0 +1,58 @@
+---
+layout: full_table
+title: Complete Shot Distance Data
+hide_sidebar: True
+permalink: /stats/shot-distance-full
+---
+
+{% assign player_url = "https://www.nba.com/stats/player/" %}
+
+<table class="full-table">
+  <tr>
+    <th class="right">Rank</th>
+    <th class="left">Name</th>
+    <th class="center">
+      <select id="team-filter">
+        <option value="">Team</option>
+        {% assign teams = site.data.shot_distance | map: "team" | uniq | sort %}
+        {% for team in teams %}
+            <option value="{{ team }}">{{ team }}</option>
+        {% endfor %}
+      </select>
+    </th>
+    <th class="right">All FG</th>
+    <th class="right">Avg. Dist (All)</th>
+    <th class="right">Avg. Dist (3pt)</th>
+    <th class="right">Avg. Dist (2pt)</th>
+    <th class="right">Made FG</th>
+    <th class="right">Made Avg. Dist (All)</th>
+    <th class="right">Made Avg. Dist (3pt)</th>
+    <th class="right">Made Avg. Dist (2pt)</th>
+    <th class="right">Miss FG</th>
+    <th class="right">Miss Avg. Dist (All)</th>
+    <th class="right">Miss Avg. Dist (3pt)</th>
+    <th class="right">Miss Avg. Dist (2pt)</th>
+  </tr>
+
+  {% for player in site.data.shot_distance %}
+
+    <tr>
+      <td class="table-rank">{{ forloop.index }}</td>
+      <td><a href="{{ player_url}}{{ player.id }}">{{ player.name }}</a></td>
+      <td class="center team-col"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="right">{{ player.fga | round: 0 }}</td>
+      <td class="right">{{ player.all_avg_dist }}</td>
+      <td class="right">{{ player.thr_avg_dist }}</td>
+      <td class="right">{{ player.two_avg_dist }}</td>
+      <td class="right">{{ player.made_fga | round: 0 }}</td>
+      <td class="right">{{ player.made_all_avg_dist }}</td>
+      <td class="right">{{ player.made_thr_avg_dist }}</td>
+      <td class="right">{{ player.made_two_avg_dist }}</td>
+      <td class="right">{{ player.miss_fga | round: 0 }}</td>
+      <td class="right">{{ player.miss_all_avg_dist }}</td>
+      <td class="right">{{ player.miss_thr_avg_dist }}</td>
+      <td class="right">{{ player.miss_two_avg_dist }}</td>
+    </tr>
+  {% endfor %}
+</table>
+

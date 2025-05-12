@@ -23,7 +23,6 @@ has_date: true
 
 <p>
   There's a narrowing out as you get closer to the rim for the guys, mostly centres, who don't shoot threes.
-  You'll notice that all of the bottom 10 in average shot distance haven't made—or, in many cases, attempted—a single three pointer, which is why the <code>Avg. Made 3PT Distance</code> column is blank.
 </p>
 
 <h2 id="shot_dist_overall">Average Shot Distance — Top 10 and Bottom 10 <span style="text-transform: none;">(min. 100 shots)</span></h2>
@@ -61,7 +60,7 @@ has_date: true
   {% endfor %}
 </table>
 
-<h2 id="shot_make_3pt">Average 3PT Distance — Top 5 and Bottom 5 <span style="text-transform: none;">(min. 100 shots)</span></h2>
+<h2 id="shot_make_3pt">Average 3PT Distance — Top 10 <span style="text-transform: none;">(min. 100 shots)</span></h2>
 
 <table>
   <tr>
@@ -76,19 +75,12 @@ has_date: true
     | reject: "made_thr_avg_dist", nil 
     | reject: "made_thr_avg_dist", "" %}
   {% assign sorted = filtered | sort: "made_thr_avg_dist" | reverse %}
-  {% assign first_ten = sorted | slice: 0, 5 %}
-  {% assign last_ten = sorted | slice: -5, 5 %}
-  {% assign total_count = filtered | size %}
-  {% assign combined = first_ten | concat: last_ten %}  
+  {% assign first_ten = sorted | slice: 0, 10 %}
 
-  {% for player in combined %}
+  {% for player in first_ten %}
     <tr>
       <td class="table-rank">
-        {% if forloop.index <= 5 %}
         {{ forloop.index }}
-      {% else %}
-        {{ total_count | minus: 5 | plus: forloop.index | minus: 5 }}
-      {% endif %}
       </td>
       <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
       <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>

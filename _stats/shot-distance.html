@@ -72,7 +72,9 @@ has_date: true
     <th class="right narrow-remove">Avg. 3PT Miss Dist.</th>
   </tr>
 
-  {% assign filtered = site.data.shot_distance | where_exp: "item", "item.made_thr_avg_dist != nil and item.made_thr_avg_dist != ''" %}
+  {% assign filtered = site.data.shot_distance 
+    | reject: "made_thr_avg_dist", nil 
+    | reject: "made_thr_avg_dist", "" %}
   {% assign sorted = filtered | sort: "made_thr_avg_dist" | reverse %}
   {% assign first_ten = sorted | slice: 0, 5 %}
   {% assign last_ten = sorted | slice: -5, 5 %}
@@ -107,7 +109,9 @@ has_date: true
     <th class="right narrow-remove">Avg. 2PT Miss Dist.</th>
   </tr>
 
-  {% assign filtered = site.data.shot_distance | where_exp: "item", "item.made_two_avg_dist != nil and item.made_two_avg_dist != ''" %}
+  {% assign filtered = site.data.shot_distance 
+    | reject: "made_two_avg_dist", nil 
+    | reject: "made_two_avg_dist", "" %}  
   {% assign sorted = filtered | sort: "made_two_avg_dist" | reverse %}
   {% assign first_ten = sorted | slice: 0, 5 %}
   {% assign last_ten = sorted | slice: -5, 5 %}

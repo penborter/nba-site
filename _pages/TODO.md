@@ -4,7 +4,8 @@ title: TODO
 ---
 
 # Pages
-- [ ] Main page remove "under construction", start listing main leaderboard pages
+- [X] Main page remove "under construction", start listing main leaderboard pages
+- [ ] Shot distance leaderboard add FG% for graphs - FG% vs. average distance (particularly for 3PTs)
 
 # Improvements
 - [ ] Interactive graphs for the: 
@@ -13,4 +14,4 @@ title: TODO
 
 # Design
 - [ ] Fix checkboxes / bullet lists (like main site)
-- [ ] Redesign, include non-monospace font and two-tone colour scheme
+- [X] Redesign, include non-monospace font and two-tone colour scheme

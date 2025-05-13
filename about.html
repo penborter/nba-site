@@ -5,17 +5,18 @@ permalink: /
 
 {% assign dis_first_three = site.data.distance | slice: 0, 3 %}
 {% assign mbp_first_three = site.data.moreyball_full | slice: 0, 3 %}
+{% assign shot_dis_first_three = site.data.shot_distance | sort: "all_avg_dist" | reverse | slice: 0, 3 %}
 
-<h1 id="intro-heading">Welcome to the NBA side of the site.</h1>
+<h1 id="intro-heading">Welcome to NBA.ben.report!</h1>
 <p>
-  If you're not that keen on the National Basketball Association, you can return to the main site <a href="https://ben.report">here</a>, or in the sidebar. 
+  If you're not that keen on the National Basketball Association, you can return to my main website <a href="https://ben.report">here</a>, or at "Home" in the sidebar. 
 </p>
 
 <h2>Leaderboards</h2>
 
 <p>Random stats, odds and ends, updated weekly every Monday:</p>
 
-<h3><a href="/stats/moreyball">Moreyball Leaderboard — MB%</a></h3>
+<h3><a href="/stats/moreyball">Moreyball Percentage Leaderboard — Most Shots from Moreyball range</a></h3>
 <a class="leaderboard-summary" href="/stats/moreyball">
   {% for player in mbp_first_three %}
 
@@ -36,7 +37,28 @@ permalink: /
   {% endfor %}
 </a>
 
-<h3><a href="/stats/distance">Distance Leaderboard — Miles / 36 min</a></h3>
+<h3><a href="/stats/shot-distance">Shot Distance Leaderboard — Longest Average Shot Distance (ft)</a></h3>
+<a class="leaderboard-summary" href="/stats/shot-distance">
+  {% for player in shot_dis_first_three %}
+
+  {% assign mpt_split = player.all_avg_dist | round: 3 | split: "." %}
+  {% assign integral = mpt_split[0] %}
+  {% assign fractional = mpt_split[1] | append: "000" | truncate: 3, "" %} 
+
+    <div class="summary-item" style="--rank: '{{ forloop.index }}'">
+      <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/{{ player.id }}.png">
+      <div class="player-info">
+        <span class="player-name">{{ player.name }}</span>
+        <div class="player-right">
+          <span>{{ integral }}.{{ fractional }}</span>
+          <span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</a>
+
+<h3><a href="/stats/distance">Running Distance Leaderboard — Furthest Distance (miles) per 36 min</a></h3>
 <a class="leaderboard-summary" href="/stats/distance">
   {% for player in dis_first_three %}
 

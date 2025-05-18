@@ -940,6 +940,7 @@ tr {
 
 td {
   padding: 0.2em 0.8em;
+  white-space: nowrap;
 
   &:not(:last-of-type) {
     border-right: 1.5px solid var(--fg);

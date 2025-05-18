@@ -36,10 +36,11 @@ has_date: true
     <th class="right narrow-remove">FGA</th>
   </tr>
 
-  {% assign first_ten = site.data.shot_distance | sort: "all_avg_dist" | reverse | slice: 0, 10 %}
-  {% assign last_ten = site.data.shot_distance | sort: "all_avg_dist" | reverse |  slice: -10, 10 %}
+  {% assign ordered   = site.data.shot_distance | sort: "all_avg_dist" %}
+  {% assign first_ten = ordered | reverse | slice: 0, 10 %}
+  {% assign last_ten  = ordered | slice: 0, 10 | reverse %}
+  {% assign combined  = first_ten | concat: last_ten %}
   {% assign total_count = site.data.shot_distance | size %}
-  {% assign combined = first_ten | concat: last_ten %}
 
   {% for player in combined %}
 
@@ -104,11 +105,12 @@ has_date: true
   {% assign filtered = site.data.shot_distance 
     | reject: "made_two_avg_dist", nil 
     | reject: "made_two_avg_dist", "" %}  
-  {% assign sorted = filtered | sort: "made_two_avg_dist" | reverse %}
-  {% assign first_ten = sorted | slice: 0, 5 %}
-  {% assign last_ten = sorted | slice: -5, 5 %}
+  {% assign ordered  = filtered | sort: "made_two_avg_dist" %}
+  {% assign first_5  = ordered | reverse | slice: 0, 5 %}
+  {% assign last_5   = ordered | slice: 0, 5 | reverse %}
+  {% assign combined = first_5 | concat: last_5 %}
+
   {% assign total_count = filtered | size %}
-  {% assign combined = first_ten | concat: last_ten %}  
 
   {% for player in combined %}
     <tr>

@@ -17,9 +17,10 @@ exclude:
 
 # 3. Gems / Plugins
 plugins:
-  - jekyll-seo-tag
   - jekyll-feed
-  - jekyll-target-blank
+  - jekyll-remote-theme
+
+remote_theme: penborter/stretch-theme
 
 # 4. Gem settings
 twitter:

@@ -1,0 +1,4 @@
+{% assign zeros = "0000000000000000" %}
+{% assign parts = include.value | round: include.places | split: '.' %}
+{% assign frac  = parts[1] | append: zeros | slice: 0, include.places %}
+{{ parts[0] }}.{{ frac }}

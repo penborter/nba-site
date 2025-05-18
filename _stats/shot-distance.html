@@ -55,7 +55,7 @@ has_date: true
       </td>
       <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
       <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
-      <td class="right">{{ player.all_avg_dist }}</td>
+      <td class="right">{% include float.html value=player.all_avg_dist places=2 %}</td>
       <td class="right narrow-remove">{{ player.fga }}</td>
     </tr>
   {% endfor %}
@@ -73,9 +73,9 @@ has_date: true
   </tr>
 
   {% assign filtered = site.data.shot_distance
-    | where_exp: "r", "r.made_thr_avg_dist and r.made_thr_avg_dist != ''" %}
-  {% assign sorted   = filtered | sort: "made_thr_avg_dist" | reverse %}
-  {% assign first_ten = sorted | slice: 0, 10 %}
+    | where_exp:"r","r.made_thr_avg_dist != ''" %}
+  {% assign sorted   = filtered | sort:"made_thr_avg_dist" | reverse %}
+  {% assign first_ten = sorted | slice:0,10 %}  
 
   {% for player in first_ten %}
     <tr>
@@ -84,8 +84,8 @@ has_date: true
       </td>
       <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
       <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
-      <td class="right">{{ player.made_thr_avg_dist }}</td>
-      <td class="right narrow-remove">{{ player.miss_thr_avg_dist }}</td>
+      <td class="right">{% include float.html value=player.made_thr_avg_dist places=2 %}</td>
+      <td class="right narrow-remove">{% include float.html value=player.miss_thr_avg_dist places=2 %}</td>
     </tr>
   {% endfor %}
 </table>
@@ -102,11 +102,11 @@ has_date: true
   </tr>
 
   {% assign filtered = site.data.shot_distance
-    | where_exp: "r", "r.made_two_avg_dist and r.made_two_avg_dist != ''" %}
-  {% assign ordered  = filtered | sort: "made_two_avg_dist" %}
-  {% assign first_5  = ordered | reverse | slice: 0, 5 %}
-  {% assign last_5   = ordered | slice: 0, 5 | reverse %}
-  {% assign combined = first_5 | concat: last_5 %}  
+    | where_exp:"r","r.made_two_avg_dist != ''" %}
+  {% assign ordered  = filtered | sort:"made_two_avg_dist" %}
+  {% assign first_5  = ordered | reverse | slice:0,5 %}
+  {% assign last_5   = ordered | slice:0,5 | reverse %}
+  {% assign combined = first_5 | concat:last_5 %}  
 
   {% assign total_count = filtered | size %}
 
@@ -121,8 +121,8 @@ has_date: true
       </td>
       <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
       <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
-      <td class="right">{{ player.made_two_avg_dist }}</td>
-      <td class="right narrow-remove">{{ player.miss_two_avg_dist }}</td>
+      <td class="right">{% include float.html value=player.made_two_avg_dist places=2 %}</td>
+      <td class="right narrow-remove">{% include float.html value=player.miss_two_avg_dist places=2 %}</td>
     </tr>
   {% endfor %}
 </table>

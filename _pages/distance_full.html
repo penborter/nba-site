@@ -42,7 +42,7 @@ permalink: /stats/distance-full
     <tr>
       <td class="table-rank">{{ forloop.index }}</td>
       <td><a href="{{ player_url}}{{ player.id }}">{{ player.name }}</a></td>
-      <td class="center team-col"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td class="center team-col team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</td>
       <td class="right">{{ player.games | round: 0 }}</td>
       <td class="right">{{ player.minutes | round: 1 }}</td>
       <td class="right">{{ player.miles | round: 2 }}</td>

@@ -20,7 +20,6 @@ has_date: true
   <tr>
     <th class="right">No.</th>
     <th class="left">Name</th>
-    <th class="center narrow-remove">Team</th>
     <th class="right">Miles / 36</th>
     <th class="right narrow-remove">Total Miles</th>
   </tr>
@@ -45,8 +44,7 @@ has_date: true
         {{ total_count | minus: 10 | plus: forloop.index | minus: 10 }}
       {% endif %}
       </td>
-      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
-      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
       <td class="right">{{ integral }}.{{ fractional }}</td>
       <td class="right narrow-remove">{{ player.miles | round: 2 }}</td>
     </tr>

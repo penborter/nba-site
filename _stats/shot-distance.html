@@ -31,7 +31,6 @@ has_date: true
   <tr>
     <th class="right">No.</th>
     <th class="left">Name</th>
-    <th class="center narrow-remove">Team</th>
     <th class="right">Avg. Shot Distance</th>
     <th class="right narrow-remove">FGA</th>
   </tr>
@@ -53,8 +52,7 @@ has_date: true
         {{ total_count | minus: 10 | plus: forloop.index | minus: 10 }}
       {% endif %}
       </td>
-      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
-      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
       <td class="right">{% include float.html value=player.all_avg_dist places=2 %}</td>
       <td class="right narrow-remove">{{ player.fga }}</td>
     </tr>
@@ -67,7 +65,6 @@ has_date: true
   <tr>
     <th class="right">No.</th>
     <th class="left">Name</th>
-    <th class="center narrow-remove">Team</th>
     <th class="right">Avg. 3PT Made Dist.</th>
     <th class="right narrow-remove">Avg. 3PT Miss Dist.</th>
   </tr>
@@ -82,8 +79,7 @@ has_date: true
       <td class="table-rank">
         {{ forloop.index }}
       </td>
-      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
-      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
       <td class="right">{% include float.html value=player.made_thr_avg_dist places=2 %}</td>
       <td class="right narrow-remove">{% include float.html value=player.miss_thr_avg_dist places=2 %}</td>
     </tr>
@@ -96,7 +92,6 @@ has_date: true
   <tr>
     <th class="right">No.</th>
     <th class="left">Name</th>
-    <th class="center narrow-remove">Team</th>
     <th class="right">Avg. 2PT Made Dist.</th>
     <th class="right narrow-remove">Avg. 2PT Miss Dist.</th>
   </tr>
@@ -119,8 +114,7 @@ has_date: true
         {{ total_count | minus: 5 | plus: forloop.index | minus: 5 }}
       {% endif %}
       </td>
-      <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
-      <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+      <td><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
       <td class="right">{% include float.html value=player.made_two_avg_dist places=2 %}</td>
       <td class="right narrow-remove">{% include float.html value=player.miss_two_avg_dist places=2 %}</td>
     </tr>

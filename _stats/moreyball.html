@@ -21,7 +21,7 @@ has_date: true
   A more detailed table is available <a href="/stats/moreyball-full">here</a>, and the raw .csv is saved <a href="https://github.com/penborter/nba-data/blob/main/data/dynamic/NBA_Leaders_MOREYBALL_Rate.csv">here</a>.
 </p>
 
-<h2 id="moreyball_pct">Moreyball % — Top 5 and Bottom 5 <span style="text-transform: none;">(min. 100 FGA)</span></h2>
+<h2 id="moreyball_pct">Moreyball % — Top 5 and Bottom 5 <span style="text-transform: none;">(min. 50 FGA)</span></h2>
 
 <div class="mb-leaderboard narrow-remove">
   <div class="player-card">
@@ -93,7 +93,6 @@ has_date: true
   <tr>
     <th class="right">No.</th>
     <th class="left">Name</th>
-    <th class="center narrow-remove">Team</th>
     <th class="right">MB%</th>
     <th class="right narrow-remove">MB FGA</th>
   </tr>
@@ -116,8 +115,7 @@ has_date: true
       {{ total_count | minus: 5 | plus: forloop.index | minus: 5 }}
     {% endif %}
     </td>
-    <td><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
-    <td class="center team-col narrow-remove"><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span></td>
+    <td><span class="team-name" style="--color: var(--{{ player.team }}_2); --background: var(--{{ player.team}}_1);">{{ player.team }}</span><a href="{{ player_url }}{{ player.id }}">{{ player.name }}</a></td>
     <td class="right">{{ integral }}.{{ fractional }}</td>
     <td class="right narrow-remove">{{ player.MB_FGA | round: 0 }}</td>
   </tr>
@@ -125,11 +123,10 @@ has_date: true
 </table>
 
 
-<h2 id="discussion_2024_03_29">Discussion — 2024-03-29</h2>
+<h2 id="discussion_2024_03_29">Discussion — 2025-11-10</h2>
 <h3 id="players">Players</h3>
 <p>
-  <a href="https://www.youtube.com/shorts/i9_MxNIX05o">Dean W.</a> and Sam Merrill continue trading places for the top of the leaderboard in what's effectively a dead heat (0.9569 vs. 0.9571 — less than one shot either way).
-  The race has absolutely tightened, and by the end of the season I think it'll be worth plotting the change in the league leaders' percentages over time. Sam Merrill and Dean W. are neck and neck, with Sam on a lot more volume.
+  I'll add a bit more discussion here once we get further into the season.  
 </p>
 
 <p>
@@ -140,34 +137,15 @@ has_date: true
   file = "plot.png"
 %}
 
-<p>
-  For comparison, here's the shot chart for DeMar DeRozan, who is suddenly last in the league in MB%, hovering just below 0.300.
-</p>
-
-{% include picture.html 
-  file = "dmdr.png"
-%}
 
 <h3 id="teams">Teams</h3>
 
 <p>
-  Cleveland holds four out of the top five spots on the leaderboard, but then there's a big jump to the next Cleveland player JaVonte Green, ranked 60<sup>th</sup> (MB% 0.843).
+  I'll add a bit more discussion here once we get further into the season.
 </p>
 
 {% include picture.html 
   file = "teamplot.png"
   class = "wide"
 %}
-
-<p>
-  Despite Cleveland covering the top of the leaderboard individually, Boston has the highest team average MB% at 0.782, while San Antonio has the lowest at 0.653.
-  There isn't a huge gap between all of the teams, and the average is largely driven by the star players' shot diets, as you can imagine.
-  San Antonio, for example, is dragged way down by DeMar DeRozan on the bottom right of the graph there.
-</p>
-
-<p>
-  Houston's highest MB% player (Tari Eason) ranks only 136<sup>th</sup> in the league with a MB% of 0.777, the lowest ranking for a team leader in this weird stat. 
-  Memphis is in a similar boat, if you exclude Jay Huff (who is 8<sup>th</sup> in the league). 
-  After that, their next-highest player is GG Jackson, ranked 135<sup>th</sup> with a MB% of 0.779.
-</p>
 

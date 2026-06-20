@@ -51,13 +51,6 @@ has_date: true
   {% endfor %}
 </table>
 
-<h2>Discussion 2025-02-23</h2>
-
-<p>
-  As you can imagine, the Knicks' starters lead the league in total miles run. 
-  Miles Bridges, Josh Hart, and Jalen Brunson are the top three in the league, with Bridges having run an equivalent of more than 6 marathons at the time of writing.
-</p>
-
-<p>
-  Miles per game is a little different, with the Knicks interspersed with other speedy players 
-</p>
+<h2>Methodology</h2>
+<p>This is a simpler one—the NBA API has an <a href="https://github.com/swar/nba_api/blob/master/docs/nba_api/stats/endpoints/leaguedashptstats.md">endpoint</a> related to player tracking stats, which includes total distance run by each player and their average speed, among other things.</p>
+<p>We take these stats for each player and divide by total minutes played (or by the number of miles in a marathon, for the <a href="/stats/distance-full">full data table</a>).</p>
